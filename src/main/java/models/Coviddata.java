@@ -8,6 +8,7 @@ package models;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Coviddata.findByTrndate", query = "SELECT c FROM Coviddata c WHERE c.trndate = :trndate")
     , @NamedQuery(name = "Coviddata.findByDatakind", query = "SELECT c FROM Coviddata c WHERE c.datakind = :datakind")
     , @NamedQuery(name = "Coviddata.findByQty", query = "SELECT c FROM Coviddata c WHERE c.qty = :qty")
-    , @NamedQuery(name = "Coviddata.findByProodqty", query = "SELECT c FROM Coviddata c WHERE c.proodqty = :proodqty")})
+    , @NamedQuery(name = "Coviddata.findByProodqty", query = "SELECT c FROM Coviddata c WHERE c.proodqty = :proodqty")
+    , @NamedQuery(name = "Coviddata.findByCountryAndDataKindAndTrndate", query = "SELECT c FROM Coviddata c WHERE c.datakind = :datakind and c.trndate = :trndate and c.country = :country")})
 public class Coviddata implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +65,7 @@ public class Coviddata implements Serializable {
     @Column(name = "PROODQTY")
     private int proodqty;
     @JoinColumn(name = "COUNTRY", referencedColumnName = "COUNTRY")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private Country country;
 
     public Coviddata() {
@@ -153,5 +155,5 @@ public class Coviddata implements Serializable {
     public String toString() {
         return "models.Coviddata[ coviddata=" + coviddata + " ]";
     }
-    
+
 }

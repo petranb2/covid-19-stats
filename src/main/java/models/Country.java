@@ -54,7 +54,7 @@ public class Country implements Serializable {
     private Double lat;
     @Column(name = "LONG")
     private Double long1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "country")
     private Collection<Coviddata> coviddataCollection;
 
     public Country() {
