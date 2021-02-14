@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import models.Country;
+import view.ArxikoMenu;
 
 /**
  *
@@ -34,6 +35,10 @@ public class NewMain {
         em.getTransaction().begin();
         em.persist(country);
         em.getTransaction().commit();
+        
+        ArxikoMenu mainFrame = new ArxikoMenu();
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
     }
 
 }

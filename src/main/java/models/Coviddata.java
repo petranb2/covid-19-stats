@@ -8,6 +8,7 @@ package models;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -63,7 +64,7 @@ public class Coviddata implements Serializable {
     @Column(name = "PROODQTY")
     private int proodqty;
     @JoinColumn(name = "COUNTRY", referencedColumnName = "COUNTRY")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST,optional = false)
     private Country country;
 
     public Coviddata() {

@@ -135,27 +135,38 @@ public class ArxikoMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1ActionPerformed
 
     private void manageDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDataBtnActionPerformed
-        // TODO add your handling code here:
+        manageDataUI frame = new manageDataUI();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_manageDataBtnActionPerformed
 
     private void showCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCountryBtnActionPerformed
-        // TODO add your handling code here:
+        showCountryUI frame = new showCountryUI();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_showCountryBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-                         
-        Object[] options ={"Ναι","Όχι"};
-        int x = JOptionPane.showOptionDialog(null,"Θέλετε να αποχωρήσετε από την εφαρμογή;","ΕΞΟΔΟΣ",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options,options[0]);
-        if (x == JOptionPane.YES_OPTION){
-        
-        System.exit(0);
+
+        Object[] options = {"Ναι", "Όχι"};
+        int x = JOptionPane.showOptionDialog(null, "Θέλετε να αποχωρήσετε από την εφαρμογή;", "ΕΞΟΔΟΣ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (x == JOptionPane.YES_OPTION) {
+
+            System.exit(0);
         }
-                // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void showMapBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapBtnActionPerformed
-        // TODO add your handling code here:
+        showMapUI frame = new showMapUI();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_showMapBtnActionPerformed
 
     /**
@@ -191,8 +202,7 @@ public class ArxikoMenu extends javax.swing.JFrame {
                 new ArxikoMenu().setVisible(true);
             }
         });
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
