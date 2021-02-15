@@ -24,6 +24,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import models.Country;
 import models.Coviddata;
+import static utils.IsNumeric.isNumeric;
 
 /**
  *
@@ -48,21 +49,33 @@ public class LoadCovidData {
     }
 
     public void startLoadData() {
-        if (deaths) {
-            loadData(ApiClient.DEATHS_URL, PROPERTY_JSON_DEATHS, DATA_KIND_DEATHS);
-        }
-        if (recovered) {
-            loadData(ApiClient.RECOVERED_URL, PROPERTY_JSON_RECOVERED, DATA_KIND_RECOVERED);
-        }
-        if (confirmed) {
-            loadData(ApiClient.CONFIRMED_URL, PROPERTY_JSON_CONFIRMED, DATA_KIND_CONFIRMED);
+
+        Thread thread = new Thread() {
+            public void run() {
+                if (deaths) {
+                    loadData(ApiClient.DEATHS_URL, PROPERTY_JSON_DEATHS, DATA_KIND_DEATHS);
+                }
+                if (recovered) {
+                    loadData(ApiClient.RECOVERED_URL, PROPERTY_JSON_RECOVERED, DATA_KIND_RECOVERED);
+                }
+                if (confirmed) {
+                    loadData(ApiClient.CONFIRMED_URL, PROPERTY_JSON_CONFIRMED, DATA_KIND_CONFIRMED);
+                }
+            }
+        };
+        System.out.println("Thread Start From startLoadData");
+        thread.start();
+        try {
+            thread.join();
+            System.out.println("Thread Ends From startLoadData");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(LoadCovidData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void loadData(String URL, String dataProperty, short dataKind) {
         Thread thread = new Thread() {
             public void run() {
-                System.out.println("Thread Running");
                 JsonParser parser = new JsonParser();
                 ApiClient apiClient = new ApiClient(URL);
                 String json = apiClient.fetch();
@@ -73,7 +86,7 @@ public class LoadCovidData {
                 saveData(data.getAsJsonArray(), dataKind);
             }
         };
-
+        System.out.println("Thread Start From " + URL);
         thread.start();
         try {
             thread.join();
@@ -83,14 +96,7 @@ public class LoadCovidData {
         }
 
     }
-    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        return pattern.matcher(strNum).matches();
-    }
 
     private void saveData(JsonArray confirmedArray, short dataKind) {
         EntityManager em; // δημιουργώ μια μεταβλητή entity manager
@@ -137,7 +143,7 @@ public class LoadCovidData {
                             List<Country> fetchedCountry = (List<Country>) namedQuery.getResultList();
                             if (fetchedCountry.size() >= 1) {
                                 isCountrySaved = true;
-                                System.out.println("Country is in db");
+//                                System.out.println("Country is in db");
                                 break;
                             }
 
@@ -194,7 +200,7 @@ public class LoadCovidData {
             if (counter >= 50) {
                 em.flush();
                 em.clear();
-                System.out.println("Batch insert ------------:");
+//                System.out.println("Batch insert ------------:");
                 counter = 0;
             }
         }
