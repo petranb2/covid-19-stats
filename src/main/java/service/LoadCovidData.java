@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -35,6 +34,11 @@ public class LoadCovidData {
     private boolean deaths;
     private boolean recovered;
     private boolean confirmed;
+    private boolean countriesOnly;
+    public static final boolean DEATHS = true;
+    public static final boolean RECOVERED = true;
+    public static final boolean CONFIRMED = true;
+    public static final boolean COUTRIES_ONLY = true;
     private final short DATA_KIND_DEATHS = 1;
     private final short DATA_KIND_RECOVERED = 2;
     private final short DATA_KIND_CONFIRMED = 3;
@@ -42,24 +46,34 @@ public class LoadCovidData {
     private final String PROPERTY_JSON_RECOVERED = "recovered";
     private final String PROPERTY_JSON_CONFIRMED = "confirmed";
 
-    public LoadCovidData(boolean deaths, boolean recovered, boolean confirmed) {
+    /**
+     *
+     * @param deaths true | false
+     * @param recovered true | false
+     * @param confirmed true | false
+     * @param countriesOnly true | false
+     */
+    public LoadCovidData(boolean deaths, boolean recovered, boolean confirmed, boolean countriesOnly) {
         this.deaths = deaths;
         this.recovered = recovered;
         this.confirmed = confirmed;
+        this.countriesOnly = countriesOnly;
     }
 
+    /**
+     *
+     */
     public void startLoadData() {
-
         Thread thread = new Thread() {
             public void run() {
                 if (deaths) {
-                    loadData(ApiClient.DEATHS_URL, PROPERTY_JSON_DEATHS, DATA_KIND_DEATHS);
+                    loadData(ApiClient.DEATHS_URL, PROPERTY_JSON_DEATHS, DATA_KIND_DEATHS, countriesOnly);
                 }
                 if (recovered) {
-                    loadData(ApiClient.RECOVERED_URL, PROPERTY_JSON_RECOVERED, DATA_KIND_RECOVERED);
+                    loadData(ApiClient.RECOVERED_URL, PROPERTY_JSON_RECOVERED, DATA_KIND_RECOVERED, countriesOnly);
                 }
                 if (confirmed) {
-                    loadData(ApiClient.CONFIRMED_URL, PROPERTY_JSON_CONFIRMED, DATA_KIND_CONFIRMED);
+                    loadData(ApiClient.CONFIRMED_URL, PROPERTY_JSON_CONFIRMED, DATA_KIND_CONFIRMED, countriesOnly);
                 }
             }
         };
@@ -73,17 +87,28 @@ public class LoadCovidData {
         }
     }
 
-    private void loadData(String URL, String dataProperty, short dataKind) {
+    /**
+     *
+     * @param URL
+     * @param dataProperty
+     * @param dataKind
+     * @param countriesOnly
+     */
+    private void loadData(String URL, String dataProperty, short dataKind, boolean countriesOnly) {
         Thread thread = new Thread() {
             public void run() {
                 JsonParser parser = new JsonParser();
                 ApiClient apiClient = new ApiClient(URL);
                 String json = apiClient.fetch();
+                if (json == null) {
+                    System.out.println("Null response from REST API ");
+                    return;
+                }
                 JsonElement jsonTree = parser.parse(json);
-
                 JsonObject jsonObject = jsonTree.getAsJsonObject();
                 JsonElement data = jsonObject.get(dataProperty);
-                saveData(data.getAsJsonArray(), dataKind);
+
+                saveData(data.getAsJsonArray(), dataKind, countriesOnly);
             }
         };
         System.out.println("Thread Start From " + URL);
@@ -97,8 +122,13 @@ public class LoadCovidData {
 
     }
 
-
-    private void saveData(JsonArray confirmedArray, short dataKind) {
+    /**
+     *
+     * @param confirmedArray
+     * @param dataKind
+     * @param countriesOnly
+     */
+    private void saveData(JsonArray confirmedArray, short dataKind, boolean countriesOnly) {
         EntityManager em; // δημιουργώ μια μεταβλητή entity manager
         EntityManagerFactory emf
                 = Persistence.createEntityManagerFactory("covid-db");
@@ -159,7 +189,13 @@ public class LoadCovidData {
                         }
 
 //                                        em.flush();
+                        if (countriesOnly) {
+                            break;
+                        }
                         continue;
+                    }
+                    if (countriesOnly) {
+                        break;
                     }
                     continue;
                 }
@@ -197,10 +233,10 @@ public class LoadCovidData {
 //                            System.out.println("prop : " + key);
 //                            System.out.println("value : " + value.toString());
             }
-            if (counter >= 50) {
+            if (counter >= 10) {
                 em.flush();
                 em.clear();
-//                System.out.println("Batch insert ------------:");
+                System.out.println("Batch insert ------------:");
                 counter = 0;
             }
         }
