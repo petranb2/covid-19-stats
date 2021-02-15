@@ -232,18 +232,20 @@ public class manageDataUI extends javax.swing.JFrame {
     private void insertCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertCountryBtnActionPerformed
         // TODO add your handling code here:
 
-        LoadCovidData loadData = new LoadCovidData(astheneisCheckBox.isSelected(),
-                krousmataCheckBox.isSelected(),
+        LoadCovidData loadData = new LoadCovidData(
                 thanatoiCheckBox.isSelected(),
+                astheneisCheckBox.isSelected(),
+                krousmataCheckBox.isSelected(),
                 LoadCovidData.COUTRIES_ONLY);
         loadData.startLoadData();
     }//GEN-LAST:event_insertCountryBtnActionPerformed
 
     private void insertDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertDataBtnActionPerformed
         // TODO add your handling code here:
-        LoadCovidData loadData = new LoadCovidData(astheneisCheckBox.isSelected(),
-                krousmataCheckBox.isSelected(),
+        LoadCovidData loadData = new LoadCovidData(
                 thanatoiCheckBox.isSelected(),
+                astheneisCheckBox.isSelected(),
+                krousmataCheckBox.isSelected(),
                 !LoadCovidData.COUTRIES_ONLY);
         loadData.startLoadData();
     }//GEN-LAST:event_insertDataBtnActionPerformed

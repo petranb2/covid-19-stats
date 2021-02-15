@@ -233,7 +233,7 @@ public class LoadCovidData {
 //                            System.out.println("prop : " + key);
 //                            System.out.println("value : " + value.toString());
             }
-            if (counter >= 10) {
+            if (counter >= 20) {
                 em.flush();
                 em.clear();
                 System.out.println("Batch insert ------------:");
