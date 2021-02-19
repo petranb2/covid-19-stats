@@ -6,8 +6,6 @@
 package service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -16,11 +14,11 @@ import javax.persistence.Query;
  */
 public class DeleteCovidData {
 
+    /**
+     *
+     */
     public void truncateCovidData() {
-        EntityManager em; // δημιουργώ μια μεταβλητή entity manager
-        EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("covid-db");
-        em = emf.createEntityManager();
+        EntityManager em = AppDatabase.getAppEntityManager();
         em.getTransaction().begin();
         Query q = em.createNativeQuery("DELETE FROM ROOT.COVIDDATA");
         int executeUpdate = q.executeUpdate();
@@ -28,12 +26,12 @@ public class DeleteCovidData {
         System.out.println("executeUpdate :" + executeUpdate);
     }
 
+    /**
+     *
+     */
     public void truncateCountries() {
         truncateCovidData();
-        EntityManager em; // δημιουργώ μια μεταβλητή entity manager
-        EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("covid-db");
-        em = emf.createEntityManager();
+        EntityManager em = AppDatabase.getAppEntityManager();
         em.getTransaction().begin();
         Query q = em.createNativeQuery("DELETE FROM ROOT.COUNTRY");
         int executeUpdate = q.executeUpdate();

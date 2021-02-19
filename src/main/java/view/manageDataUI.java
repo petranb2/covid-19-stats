@@ -8,6 +8,7 @@ package view;
 import javax.swing.JOptionPane;
 import service.DeleteCovidData;
 import service.LoadCovidData;
+import utils.Constants;
 
 /**
  *
@@ -236,7 +237,7 @@ public class manageDataUI extends javax.swing.JFrame {
                 thanatoiCheckBox.isSelected(),
                 astheneisCheckBox.isSelected(),
                 krousmataCheckBox.isSelected(),
-                LoadCovidData.COUTRIES_ONLY);
+                Constants.COUTRIES_ONLY);
         loadData.startLoadData();
     }//GEN-LAST:event_insertCountryBtnActionPerformed
 
@@ -246,7 +247,7 @@ public class manageDataUI extends javax.swing.JFrame {
                 thanatoiCheckBox.isSelected(),
                 astheneisCheckBox.isSelected(),
                 krousmataCheckBox.isSelected(),
-                !LoadCovidData.COUTRIES_ONLY);
+                !Constants.COUTRIES_ONLY);
         loadData.startLoadData();
     }//GEN-LAST:event_insertDataBtnActionPerformed
 

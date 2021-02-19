@@ -7,6 +7,7 @@ package eap.plh.covid19stats;
 
 import service.DeleteCovidData;
 import service.LoadCovidData;
+import utils.Constants;
 
 /**
  *
@@ -19,7 +20,7 @@ public class TestLoadData {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        LoadCovidData loadData = new LoadCovidData(LoadCovidData.DEATHS, LoadCovidData.CONFIRMED, LoadCovidData.RECOVERED, LoadCovidData.COUTRIES_ONLY);
+        LoadCovidData loadData = new LoadCovidData(Constants.DEATHS, Constants.CONFIRMED, Constants.RECOVERED, Constants.COUTRIES_ONLY);
         loadData.startLoadData();
         DeleteCovidData deleteCovidData = new DeleteCovidData();
         deleteCovidData.truncateCovidData();
