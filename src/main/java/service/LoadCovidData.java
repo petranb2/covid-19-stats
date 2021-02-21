@@ -197,10 +197,11 @@ public class LoadCovidData {
 
                 covidData.setProodqty(Proodqty + covidData.getQty());
 
-                Query namedQuery2 = em.createNamedQuery("Coviddata.findByCountryAndDataKindAndTrndate");
-                namedQuery2.setParameter("datakind", covidData.getDatakind());
-                namedQuery2.setParameter("trndate", covidData.getTrndate());
+                Query namedQuery2 = em.createNamedQuery("Coviddata.findByCountryAndDataKindByDateRange");
                 namedQuery2.setParameter("country", covidData.getCountry());
+                namedQuery2.setParameter("datakind", covidData.getDatakind());
+                namedQuery2.setParameter("fromDate", covidData.getTrndate());
+                namedQuery2.setParameter("toDate", covidData.getTrndate());
                 List<Coviddata> fetchedCoviddata = (List<Coviddata>) namedQuery2.getResultList();
                 // Check if covidData is already in db
                 if (fetchedCoviddata.size() >= 1) {
