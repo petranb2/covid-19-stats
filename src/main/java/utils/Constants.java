@@ -15,10 +15,10 @@ public class Constants {
     public static final boolean DEATHS = true;
     public static final boolean RECOVERED = true;
     public static final boolean CONFIRMED = true;
+    public static final boolean COUTRIES_ONLY = true;
     public static final short DATA_KIND_DEATHS = 1;
     public static final short DATA_KIND_RECOVERED = 2;
     public static final short DATA_KIND_CONFIRMED = 3;
-    public static final boolean COUTRIES_ONLY = true;
     public static final String PROPERTY_JSON_DEATHS = "deaths";
     public static final String PROPERTY_JSON_RECOVERED = "recovered";
     public static final String PROPERTY_JSON_CONFIRMED = "confirmed";

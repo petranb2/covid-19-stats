@@ -53,18 +53,6 @@ public class CountryController {
 
     /**
      *
-     * @param deathsTable
-     * @param confirmedTable
-     * @param recoveredTable
-     */
-    public static void clearTables(JTable deathsTable, JTable confirmedTable, JTable recoveredTable) {
-        clearTable(deathsTable);
-        clearTable(confirmedTable);
-        clearTable(recoveredTable);
-    }
-
-    /**
-     *
      * @param table
      * @param country
      * @param dataKind
@@ -76,6 +64,18 @@ public class CountryController {
             model.addRow(new Object[]{coviddata.getDatakind(), coviddata.getQty(), coviddata.getProodqty(), coviddata.getTrndate().toString()});
 
         }
+    }
+
+    /**
+     *
+     * @param deathsTable
+     * @param confirmedTable
+     * @param recoveredTable
+     */
+    public static void clearTables(JTable deathsTable, JTable confirmedTable, JTable recoveredTable) {
+        clearTable(deathsTable);
+        clearTable(confirmedTable);
+        clearTable(recoveredTable);
     }
 
     /**
