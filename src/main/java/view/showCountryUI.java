@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.table.TableModel;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.RefineryUtilities;
 import view.ArxikoMenu;
 
 /**
@@ -62,6 +65,10 @@ public class showCountryUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         confirmedTable = new javax.swing.JTable();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        confirmed_cb = new javax.swing.JCheckBox();
+        deaths_cb = new javax.swing.JCheckBox();
+        recovered_cb = new javax.swing.JCheckBox();
+        cumulative_cb = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -136,6 +143,7 @@ public class showCountryUI extends javax.swing.JFrame {
 
         showDiagramBtn.setBackground(new java.awt.Color(0, 204, 204));
         showDiagramBtn.setText("Προβολή σε διάγραμμα");
+        showDiagramBtn.setToolTipText("Επιλέξτε την χώρα που σας ενδιαφέρει καθώς και το είδος των δεδομένων");
         showDiagramBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showDiagramBtnActionPerformed(evt);
@@ -244,6 +252,18 @@ public class showCountryUI extends javax.swing.JFrame {
             }
         });
 
+        confirmed_cb.setText("CONFIRMED");
+        confirmed_cb.setToolTipText("Επιβεβαιωμένα κρούσματα");
+
+        deaths_cb.setText("DEATHS");
+        deaths_cb.setToolTipText("Θάνατοι");
+
+        recovered_cb.setText("RECOVERED");
+        recovered_cb.setToolTipText("Ασθενείς που έχουν ανακάμψει");
+
+        cumulative_cb.setText("Accumulated Data");
+        cumulative_cb.setToolTipText("Επιλέξτε για σωρευτικά δεδομένα");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,32 +279,47 @@ public class showCountryUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(104, 104, 104)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(128, 128, 128)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(229, Short.MAX_VALUE))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(returnBtn))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(returnBtn)
+                                        .addGap(0, 147, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(145, 145, 145)
                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(232, 232, 232)
+                                .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(confirmed_cb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deaths_cb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(recovered_cb)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(dataTab, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(cumulative_cb)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(56, 56, 56)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(446, Short.MAX_VALUE)))
+                    .addContainerGap(644, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,22 +334,29 @@ public class showCountryUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmed_cb)
+                    .addComponent(deaths_cb)
+                    .addComponent(recovered_cb))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cumulative_cb)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(437, Short.MAX_VALUE)))
+                    .addContainerGap(812, Short.MAX_VALUE)))
         );
 
         chooseDateLabel.getAccessibleContext().setAccessibleDescription("");
@@ -328,8 +370,23 @@ public class showCountryUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menu1ActionPerformed
 
+    
     private void showDiagramBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDiagramBtnActionPerformed
-        // TODO add your handling code here:
+        String selectedCountry = choice1.getSelectedItem().toString();  
+        Boolean confirmedDataNeeded = confirmed_cb.isSelected();
+        Boolean deathsDataNeeded = deaths_cb.isSelected();
+        Boolean recoveredDataNeeded = recovered_cb.isSelected();
+        Boolean cumulativeDataNeeded = cumulative_cb.isSelected();
+                
+        if(!selectedCountry.equals("") 
+                && ( confirmedDataNeeded || deathsDataNeeded || recoveredDataNeeded)){
+            final CovidChart chart = new CovidChart("Covid-19 Data Chart", selectedCountry, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded);
+            chart.pack();
+            RefineryUtilities.centerFrameOnScreen(chart);
+            chart.setVisible(true);
+        } else {
+            System.out.println("Please select Country and/or the kind of data you would like to plot!");
+        }
     }//GEN-LAST:event_showDiagramBtnActionPerformed
 
     private void showMapBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapBtnActionPerformed
@@ -445,8 +502,11 @@ public class showCountryUI extends javax.swing.JFrame {
     private java.awt.Choice choice1;
     private java.awt.Label chooseDateLabel;
     private javax.swing.JTable confirmedTable;
+    private javax.swing.JCheckBox confirmed_cb;
+    private javax.swing.JCheckBox cumulative_cb;
     private javax.swing.JTabbedPane dataTab;
     private javax.swing.JTable deathsTable;
+    private javax.swing.JCheckBox deaths_cb;
     private javax.swing.JButton deleteDataBtn;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -465,6 +525,7 @@ public class showCountryUI extends javax.swing.JFrame {
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
     private javax.swing.JTable recoveredTable;
+    private javax.swing.JCheckBox recovered_cb;
     private javax.swing.JButton returnBtn;
     private javax.swing.JButton showDiagramBtn;
     private javax.swing.JButton showMapBtn;
