@@ -1,0 +1,44 @@
+<!doctype html>
+<html> 
+ <head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <title>Google Maps Multiple Markers</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+ </head> 
+ <body> 
+  <div id="map" style="width: auto; height: 1200px;"></div> 
+  <script type="text/javascript">var locations = [["Albania deathCases:158071 confirmedCases:7596394 recoveredCases:4339736",41.1533,20.1683,1],["Algeria deathCases:524069 confirmedCases:15992127 recoveredCases:10830460",28.0339,1.6596,1],["Andorra deathCases:20407 confirmedCases:1169199 recoveredCases:1001432",42.5063,1.5218,1],["Angola deathCases:59977 confirmedCases:2327873 recoveredCases:1495866",-11.2027,17.8739,1]]
+		let	url = new URL(window.location);
+		let	options = url.searchParams.getAll("data[]");
+			alert(options);
+			//debugger;
+			let googleArray = [];
+			let counter = 0;
+			let tempArray = [];
+			options.forEach((entry)=>{
+			tempArray.push(entry);
+			})
+			googleArray.push(tempArray);
+            //var locations = googleArray;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: new google.maps.LatLng(39.0742, 21.8243),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            var infowindow = new google.maps.InfoWindow();
+            var marker, i;
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                });
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        </script>  
+ </body>
+</html>
