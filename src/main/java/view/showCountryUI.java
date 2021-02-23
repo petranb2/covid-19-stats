@@ -5,9 +5,10 @@
  */
 package view;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import controllers.CountryController;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.table.TableModel;
@@ -15,6 +16,11 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RefineryUtilities;
 import view.ArxikoMenu;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import models.Country;
+import service.AppQueries;
+import service.DeleteCovidData;
 
 /**
  *
@@ -22,12 +28,57 @@ import view.ArxikoMenu;
  */
 public class showCountryUI extends javax.swing.JFrame {
 
+    private String countryName = "";
+    private Date startDate = null;
+    private Date endDate = null;
+    
     /**
      * Creates new form ArxikoMenu
      */
     public showCountryUI() {
         initComponents();
-        CountryController.fillDropDown(choice1);
+        
+        // Country Selection
+        choice1.add(countryName);
+        String[] countryNames = CountryController.getCountryNames();
+        for (String name : countryNames) {
+            choice1.add(name);
+        }
+
+        // Date range selection
+        Calendar calendar = Calendar.getInstance();
+        
+        // Start date
+        JTextFieldDateEditor editor1 = (JTextFieldDateEditor)jDateChooser1.getDateEditor();
+        editor1.setEditable(false);
+        calendar.add(Calendar.YEAR, -1);
+        startDate = calendar.getTime();
+        jDateChooser1.setDate(startDate);
+        jDateChooser1.getDateEditor().addPropertyChangeListener((PropertyChangeEvent e) -> {
+            if (e.getPropertyName().equals("date")) {
+                startDate = (Date) e.getNewValue();
+                if (startDate.after(endDate)) {
+                    jDateChooser2.setDate(startDate);
+                }
+                updateTables();
+            }
+        });
+        
+        // End date
+        JTextFieldDateEditor editor2 = (JTextFieldDateEditor)jDateChooser2.getDateEditor();
+        editor2.setEditable(false);
+        calendar.add(Calendar.YEAR, 1);
+        endDate = calendar.getTime();
+        jDateChooser2.setDate(endDate);
+        jDateChooser2.getDateEditor().addPropertyChangeListener((PropertyChangeEvent e) -> {
+            if (e.getPropertyName().equals("date")) {
+                endDate = (Date) e.getNewValue();
+                if (endDate.before(startDate)) {
+                    jDateChooser1.setDate(endDate);
+                }
+                updateTables();
+            }
+        });
     }
 
     /**
@@ -69,6 +120,8 @@ public class showCountryUI extends javax.swing.JFrame {
         deaths_cb = new javax.swing.JCheckBox();
         recovered_cb = new javax.swing.JCheckBox();
         cumulative_cb = new javax.swing.JCheckBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -240,17 +293,9 @@ public class showCountryUI extends javax.swing.JFrame {
 
         dataTab.addTab("CONFIRMED", jScrollPane3);
 
-        jFormattedTextField1.setText("jFormattedTextField1");
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
-        jFormattedTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jFormattedTextField1KeyPressed(evt);
-            }
-        });
+        jDateChooser1.setDateFormatString("dd-MM-yyyy");
+
+        jDateChooser2.setDateFormatString("dd-MM-yyyy");
 
         confirmed_cb.setText("CONFIRMED");
         confirmed_cb.setToolTipText("Επιβεβαιωμένα κρούσματα");
@@ -276,25 +321,27 @@ public class showCountryUI extends javax.swing.JFrame {
                         .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(104, 104, 104)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chooseDateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(128, 128, 128)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
+                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(returnBtn)
-                                        .addGap(0, 147, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(145, 145, 145)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
+                                    .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(returnBtn))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -319,7 +366,7 @@ public class showCountryUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(56, 56, 56)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(644, Short.MAX_VALUE)))
+                    .addContainerGap(480, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,21 +374,16 @@ public class showCountryUI extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmed_cb)
-                    .addComponent(deaths_cb)
-                    .addComponent(recovered_cb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cumulative_cb)
-                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -350,7 +392,7 @@ public class showCountryUI extends javax.swing.JFrame {
                     .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -401,27 +443,46 @@ public class showCountryUI extends javax.swing.JFrame {
     }//GEN-LAST:event_returnBtnActionPerformed
 
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
-        // TODO add your handling code here:
+        if (countryName.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Δεν έχετε επιλέξει χώρα!",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Object[] options = {"Ναι", "Όχι"};
+        int answer = JOptionPane.showOptionDialog(null, "Πρόκειται να διαγραφούν τα δεδομένα της χώρας '" + countryName + "'. Θέλετε να προχωρήσετε;",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (answer == JOptionPane.YES_OPTION) {
+
+            Country country = AppQueries.fetchCountryByName(countryName);
+            if (country != null) {
+                DeleteCovidData deleteCovidData = new DeleteCovidData();
+                // TODO: Delete covid data for the specified date range
+                //deleteCovidData.truncateCovidData(country);
+                JOptionPane.showMessageDialog(null, "Η διαγραφή των δεδομένων ήταν επιτυχής!",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Η επιλεγμένη χώρα δε βρέθηκε στη βάση!",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_deleteDataBtnActionPerformed
 
     private void choice1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choice1ItemStateChanged
-        CountryController.clearTables(deathsTable, confirmedTable, recoveredTable);
-        if (evt.getItem().toString().equals("")) {
-            return;
-        }
-        CountryController.fillTables(deathsTable, confirmedTable, recoveredTable, evt.getItem().toString());
+        countryName = evt.getItem().toString();
+        updateTables();
     }//GEN-LAST:event_choice1ItemStateChanged
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println(evt.paramString());
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
-
-    private void jFormattedTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField1KeyPressed
-        // TODO add your handling code here:
-        System.out.println(evt.getKeyChar());
-    }//GEN-LAST:event_jFormattedTextField1KeyPressed
-
+    private void updateTables() {
+        CountryController.clearTables(deathsTable, confirmedTable, recoveredTable);
+        if (countryName.isEmpty()) {
+            return;
+        }
+        
+        CountryController.fillTables(deathsTable, confirmedTable, recoveredTable, countryName, startDate, endDate);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -464,39 +525,7 @@ public class showCountryUI extends javax.swing.JFrame {
 
             }
         });
-
-//        UtilDateModel model = new UtilDateModel();
-//        model.setDate(1990, 8, 24);
-//        Properties p = new Properties();
-//        p.put("text.today", "Today");
-//        p.put("text.month", "Month");
-//        p.put("text.year", "Year");
-//        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-//        datePickerSince = new JDatePickerImpl(datePanel, null);
     }
-
-    public static class DateLabelFormatter extends AbstractFormatter {
-
-        private String datePattern = "yyyy-MM-dd";
-        private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-
-        @Override
-        public Object stringToValue(String text) throws ParseException {
-            return dateFormatter.parseObject(text);
-        }
-
-        @Override
-        public String valueToString(Object value) throws ParseException {
-            if (value != null) {
-                Calendar cal = (Calendar) value;
-                return dateFormatter.format(cal.getTime());
-            }
-
-            return "";
-        }
-
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choice1;
@@ -508,10 +537,11 @@ public class showCountryUI extends javax.swing.JFrame {
     private javax.swing.JTable deathsTable;
     private javax.swing.JCheckBox deaths_cb;
     private javax.swing.JButton deleteDataBtn;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

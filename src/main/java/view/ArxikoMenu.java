@@ -109,7 +109,7 @@ public class ArxikoMenu extends javax.swing.JFrame {
                     .addComponent(manageDataBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(showMapBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +125,7 @@ public class ArxikoMenu extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -43,6 +43,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -52,6 +57,11 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
             <version>10.8.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
         </dependency>
         <dependency>
             <groupId>io.github.lzh0379</groupId>

@@ -74,36 +74,36 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="label1" alignment="1" min="-2" pref="408" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="chooseCountry3ComboBox" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                                      <Component id="chooseCountry2ComboBox" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                                      <Component id="chooseCountry1ComboBox" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                                      <Component id="insertDataBtn" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="insertCountryBtn" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="showCountryMenuBtn" linkSize="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="label1" alignment="1" min="-2" pref="408" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="astheneisCheckBox" min="-2" max="-2" attributes="0"/>
-                                      <Component id="krousmataCheckBox" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="astheneisCheckBox" max="32767" attributes="0"/>
+                                      <Component id="krousmataCheckBox" alignment="0" max="32767" attributes="0"/>
                                       <Component id="thanatoiCheckBox" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <Component id="deleteCountryBtn" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <Component id="deleteDataBtn" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="insertDataBtn" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="insertCountryBtn" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="deleteCountryBtn" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="deleteDataBtn" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="returnBtn" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                          <Component id="showCountryMenuBtn" min="-2" pref="180" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -112,22 +112,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="label1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="chooseCountry1ComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="astheneisCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="astheneisCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="chooseCountry2ComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="krousmataCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="krousmataCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="chooseCountry3ComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="thanatoiCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="thanatoiCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="deleteCountryBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="insertCountryBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
@@ -138,8 +129,11 @@
                       <Component id="insertDataBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="showCountryMenuBtn" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="showCountryMenuBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="returnBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,55 +191,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteDataBtnActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="chooseCountry1ComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-            <Property name="name" type="java.lang.String" value="" noResource="true"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="chooseCountry2ComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="chooseCountry3ComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chooseCountry3ComboBoxActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="astheneisCheckBox">
           <Properties>
@@ -310,6 +255,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showCountryMenuBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="returnBtn">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3c3;&#x3c4;&#x3c1;&#x3bf;&#x3c6;&#x3ae; &#x3c3;&#x3c4;&#x3bf; &#x3b1;&#x3c1;&#x3c7;&#x3b9;&#x3ba;&#x3cc; Menu"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -38,8 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Coviddata.findByDatakind", query = "SELECT c FROM Coviddata c WHERE c.datakind = :datakind")
     , @NamedQuery(name = "Coviddata.findByQty", query = "SELECT c FROM Coviddata c WHERE c.qty = :qty")
     , @NamedQuery(name = "Coviddata.findByProodqty", query = "SELECT c FROM Coviddata c WHERE c.proodqty = :proodqty")
+    , @NamedQuery(name = "Coviddata.findByCountry", query = "SELECT c FROM Coviddata c WHERE c.country = :country")
     , @NamedQuery(name = "Coviddata.findByCountryAndDataKind", query = "SELECT c FROM Coviddata c WHERE c.country = :country and c.datakind = :datakind")
-    , @NamedQuery(name = "Coviddata.findByCountryAndDataKindAndTrndate", query = "SELECT c FROM Coviddata c WHERE c.datakind = :datakind and c.trndate = :trndate and c.country = :country")})
+    , @NamedQuery(name = "Coviddata.findByCountryAndDataKindByDateRange", query = "SELECT c FROM Coviddata c WHERE c.country = :country and c.datakind = :datakind and c.trndate >= :fromDate and c.trndate <= :toDate")})
 public class Coviddata implements Serializable {
 
     private static final long serialVersionUID = 1L;
