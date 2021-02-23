@@ -111,6 +111,9 @@ public class AppQueries {
         namedQuery2.setParameter(1, country.getCountry());
         namedQuery2.setParameter(2, dataKind);
         Integer totalCases = (Integer) namedQuery2.getSingleResult();
+        if (totalCases == null) {
+            return -1;
+        }
         return totalCases;
     }
 }

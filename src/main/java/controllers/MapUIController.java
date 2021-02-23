@@ -37,15 +37,31 @@ public class MapUIController {
      *
      * @param selectedCountriesList
      */
-    public static void showMap(JList<String> selectedCountriesList) throws IOException {
+    public static void showMap(String mainCountryName, JList<String> selectedCountriesList) throws IOException {
         ListModel<String> model = selectedCountriesList.getModel();
         JsonArray rootJSONArray = new JsonArray();
+        // add main country to the root JSON array
+        Country mainCountry = AppQueries.fetchCountryByName(mainCountryName);
+        Integer deathCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_DEATHS);
+        Integer confirmedCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_CONFIRMED);
+        Integer recoveredCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_RECOVERED);
+        JsonArray mainCountryJSONArray = new JsonArray();
+        mainCountryJSONArray.add(mainCountry.getName()
+                + " deathCases:" + deathCases.toString()
+                + " confirmedCases:" + confirmedCases.toString()
+                + " recoveredCases:" + recoveredCases.toString()
+        );
+        mainCountryJSONArray.add(mainCountry.getLat());
+        mainCountryJSONArray.add(mainCountry.getLong1());
+        mainCountryJSONArray.add(1);
+        rootJSONArray.add(mainCountryJSONArray);
+        //
         for (int i = 0; i < model.getSize(); i++) {
             String countryName = model.getElementAt(i);
             Country country = AppQueries.fetchCountryByName(countryName);
-            Integer deathCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_DEATHS);
-            Integer confirmedCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_CONFIRMED);
-            Integer recoveredCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_RECOVERED);
+            deathCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_DEATHS);
+            confirmedCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_CONFIRMED);
+            recoveredCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_RECOVERED);
             JsonArray jsonArray = new JsonArray();
             jsonArray.add(country.getName()
                     + " deathCases:" + deathCases.toString()
@@ -114,6 +130,21 @@ public class MapUIController {
      */
     public static void empltyList(JList<String> list) {
         DefaultListModel listModel = new DefaultListModel();
+        list.setModel(listModel);
+    }
+
+    /**
+     *
+     * @param list
+     */
+    public static void removeSelectedItemsFromList(JList<String> list) {
+        ListModel<String> model = list.getModel();
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            if (!list.getSelectedValuesList().contains(model.getElementAt(i))) {
+                listModel.addElement(model.getElementAt(i));
+            }
+        }
         list.setModel(listModel);
     }
 

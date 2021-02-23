@@ -9,6 +9,9 @@ import controllers.MapUIController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,13 +25,6 @@ public class showMapUI extends javax.swing.JFrame {
     public showMapUI() {
         initComponents();
         MapUIController.fillDropDown(countriesChoice);
-        DefaultListModel listModel = new DefaultListModel();
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        countriesList.setModel(listModel);
-
-        //selectedCountriesList.setModel(listModel);
     }
 
     /**
@@ -270,8 +266,12 @@ public class showMapUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1ActionPerformed
 
     private void showMapBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapBtnActionPerformed
-        // TODO add your handling code here:
-        MapUIController.showMap(selectedCountriesList);
+        try {
+            // TODO add your handling code here:
+            MapUIController.showMap(countriesChoice.getSelectedItem(), selectedCountriesList);
+        } catch (IOException ex) {
+            Logger.getLogger(showMapUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_showMapBtnActionPerformed
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
@@ -287,11 +287,8 @@ public class showMapUI extends javax.swing.JFrame {
 
     private void addCountriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCountriesBtnActionPerformed
         // TODO add your handling code here:
-        System.out.println(countriesList.getSelectedValuesList().size());
         DefaultListModel listModel = new DefaultListModel();
         ListModel<String> model = selectedCountriesList.getModel();
-
-        System.out.println(model.getSize());
         if (model.getSize() > 0) {
             //old items
             for (int i = 0; i < selectedCountriesList.getModel().getSize(); i++) {
@@ -326,6 +323,9 @@ public class showMapUI extends javax.swing.JFrame {
 
     private void removeCountriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCountriesBtnActionPerformed
         // TODO add your handling code here:
+
+        MapUIController.removeSelectedItemsFromList(selectedCountriesList);
+
     }//GEN-LAST:event_removeCountriesBtnActionPerformed
 
     /**

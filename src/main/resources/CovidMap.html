@@ -9,21 +9,10 @@
     <body>
         <div id="map" style="width: auto; height: 1200px;"></div>
         <script type="text/javascript">
-		let	url = new URL(window.location);
-		let	options = url.searchParams.getAll("data[]");
-			alert(options);
-			//debugger;
-			let googleArray = [];
-			let counter = 0;
-			let tempArray = [];
-			options.forEach((entry)=>{
-			tempArray.push(entry);
-			})
-			googleArray.push(tempArray);
-            //var locations = googleArray;
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
-                center: new google.maps.LatLng(39.0742, 21.8243),
+                center: new google.maps.LatLng(locations[0][1], locations[0][2]),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             var infowindow = new google.maps.InfoWindow();

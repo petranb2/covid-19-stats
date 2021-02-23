@@ -7,22 +7,11 @@
  </head> 
  <body> 
   <div id="map" style="width: auto; height: 1200px;"></div> 
-  <script type="text/javascript">var locations = [["Albania deathCases:158071 confirmedCases:7596394 recoveredCases:4339736",41.1533,20.1683,1],["Algeria deathCases:524069 confirmedCases:15992127 recoveredCases:10830460",28.0339,1.6596,1],["Andorra deathCases:20407 confirmedCases:1169199 recoveredCases:1001432",42.5063,1.5218,1],["Angola deathCases:59977 confirmedCases:2327873 recoveredCases:1495866",-11.2027,17.8739,1]]
-		let	url = new URL(window.location);
-		let	options = url.searchParams.getAll("data[]");
-			alert(options);
-			//debugger;
-			let googleArray = [];
-			let counter = 0;
-			let tempArray = [];
-			options.forEach((entry)=>{
-			tempArray.push(entry);
-			})
-			googleArray.push(tempArray);
-            //var locations = googleArray;
+  <script type="text/javascript">var locations = [["Afghanistan deathCases:-1 confirmedCases:-1 recoveredCases:8416150",33.93911,67.709953,1],["Albania deathCases:-1 confirmedCases:-1 recoveredCases:4403065",41.1533,20.1683,1],["Algeria deathCases:-1 confirmedCases:-1 recoveredCases:10907536",28.0339,1.6596,1],["Andorra deathCases:-1 confirmedCases:-1 recoveredCases:1011638",42.5063,1.5218,1],["Angola deathCases:-1 confirmedCases:-1 recoveredCases:1514879",-11.2027,17.8739,1]]
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
-                center: new google.maps.LatLng(39.0742, 21.8243),
+                center: new google.maps.LatLng(locations[0][1], locations[0][2]),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             var infowindow = new google.maps.InfoWindow();
