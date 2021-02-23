@@ -11,6 +11,7 @@ import java.awt.Choice;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,16 +36,20 @@ public class MapUIController {
 
     /**
      *
+     * @param mainCountryName
      * @param selectedCountriesList
+     * @param startDate
+     * @param endDate
+     * @throws IOException
      */
-    public static void showMap(String mainCountryName, JList<String> selectedCountriesList) throws IOException {
+    public static void showMap(String mainCountryName, JList<String> selectedCountriesList, Date startDate, Date endDate) throws IOException {
         ListModel<String> model = selectedCountriesList.getModel();
         JsonArray rootJSONArray = new JsonArray();
         // add main country to the root JSON array
         Country mainCountry = AppQueries.fetchCountryByName(mainCountryName);
-        Integer deathCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_DEATHS);
-        Integer confirmedCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_CONFIRMED);
-        Integer recoveredCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_RECOVERED);
+        Integer deathCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_DEATHS, startDate, endDate);
+        Integer confirmedCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
+        Integer recoveredCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_RECOVERED, startDate, endDate);
         JsonArray mainCountryJSONArray = new JsonArray();
         mainCountryJSONArray.add(mainCountry.getName()
                 + " deathCases:" + deathCases.toString()
@@ -59,9 +64,9 @@ public class MapUIController {
         for (int i = 0; i < model.getSize(); i++) {
             String countryName = model.getElementAt(i);
             Country country = AppQueries.fetchCountryByName(countryName);
-            deathCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_DEATHS);
-            confirmedCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_CONFIRMED);
-            recoveredCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_RECOVERED);
+            deathCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_DEATHS, startDate, endDate);
+            confirmedCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
+            recoveredCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_RECOVERED, startDate, endDate);
             JsonArray jsonArray = new JsonArray();
             jsonArray.add(country.getName()
                     + " deathCases:" + deathCases.toString()
@@ -87,18 +92,13 @@ public class MapUIController {
                 script += node.getWholeData();
                 node.setWholeData(script);
                 return node;
-            }).forEachOrdered((node) -> {
-                System.out.println(node.getWholeData());
             });
             return element;
-        }).forEachOrdered((_item) -> {
-            System.out.println("-------------------");
         });
         try {
             FileWriter myWriter = new FileWriter("src\\main\\resources\\CovidMap-data.html");
             myWriter.write(doc.html());
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
