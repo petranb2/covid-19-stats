@@ -33,6 +33,16 @@ public class ArxikoMenu extends javax.swing.JFrame {
         menuBar1 = new java.awt.MenuBar();
         menu1 = new java.awt.Menu();
         menu2 = new java.awt.Menu();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         manageDataBtn = new javax.swing.JButton();
         showCountryBtn = new javax.swing.JButton();
@@ -63,11 +73,103 @@ public class ArxikoMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Covid-19-Stats");
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(500, 439));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel1.setText("ANOIXTO");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel2.setText("ΠΑΝΕΠΙΣΤΗΜΙΟ");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel3.setText("ΣΧΕΔΙΑΣΜΟΣ ΛΟΓΙΣΜΙΚΟΥ");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel4.setText("ΕΛΛΗΝΙΚΟ");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel5.setText("ΣΥΣΤΗΜΑ Covid-19 stats");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel6.setText("ΥΛΟΠΟΙΗΘΗΚΕ ΑΠΟ:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel7.setText("ΠΕΤΡΟΣ ΚΟΥΛΙΑΝΟΣ");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel8.setText("ΣΑΒΒΑΣ ΜΑΛΑΜΑΣ");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel9.setText("ΟΛΓΑ ΚΡΟΥΓΚΛΟΒΑ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addContainerGap(213, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(450, 439));
 
         manageDataBtn.setBackground(new java.awt.Color(0, 204, 204));
-        manageDataBtn.setText("Διαχείριση δεδομένων Covid 19");
+        manageDataBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        manageDataBtn.setForeground(new java.awt.Color(0, 102, 102));
+        manageDataBtn.setText("ΔΙΑΧΕΙΡΗΣΗ ΔΕΔΟΜΕΝΩΝ Covid 19");
+        manageDataBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        manageDataBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        manageDataBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         manageDataBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageDataBtnActionPerformed(evt);
@@ -75,7 +177,12 @@ public class ArxikoMenu extends javax.swing.JFrame {
         });
 
         showCountryBtn.setBackground(new java.awt.Color(0, 204, 204));
-        showCountryBtn.setText("Προβολή  δεδομένων Covid 19 ανά χώρα");
+        showCountryBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        showCountryBtn.setForeground(new java.awt.Color(0, 102, 102));
+        showCountryBtn.setText("ΠΡΟΒΟΛΗ ΔΕΔΟΜΕΝΩΝ Covid 19 ΑΝΑ ΧΩΡΑ");
+        showCountryBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        showCountryBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        showCountryBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         showCountryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showCountryBtnActionPerformed(evt);
@@ -83,7 +190,12 @@ public class ArxikoMenu extends javax.swing.JFrame {
         });
 
         showMapBtn.setBackground(new java.awt.Color(0, 204, 204));
-        showMapBtn.setText("Προβολή  δεδομένων Covid 19 σε χάρτη");
+        showMapBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        showMapBtn.setForeground(new java.awt.Color(0, 102, 102));
+        showMapBtn.setText("ΠΡΟΒΟΛΗ ΔΕΔΟΜΕΝΩΝ Covid 19 ΣΕ ΧΑΡΤΗ");
+        showMapBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        showMapBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        showMapBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         showMapBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showMapBtnActionPerformed(evt);
@@ -91,7 +203,12 @@ public class ArxikoMenu extends javax.swing.JFrame {
         });
 
         exitBtn.setBackground(new java.awt.Color(0, 204, 204));
-        exitBtn.setText("Έξοδος");
+        exitBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        exitBtn.setForeground(new java.awt.Color(0, 102, 102));
+        exitBtn.setText("ΕΞΟΔΟΣ");
+        exitBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        exitBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        exitBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBtnActionPerformed(evt);
@@ -103,26 +220,26 @@ public class ArxikoMenu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(showCountryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageDataBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(showMapBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(showMapBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(manageDataBtn)
+                .addComponent(manageDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(showCountryBtn)
+                .addComponent(showCountryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(showMapBtn)
+                .addComponent(showMapBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(exitBtn)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
@@ -140,14 +257,6 @@ public class ArxikoMenu extends javax.swing.JFrame {
         frame.setVisible(true);
         dispose();
     }//GEN-LAST:event_manageDataBtnActionPerformed
-
-    private void showCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCountryBtnActionPerformed
-        showCountryUI frame = new showCountryUI();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        dispose();
-
-    }//GEN-LAST:event_showCountryBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
 
@@ -168,6 +277,13 @@ public class ArxikoMenu extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_showMapBtnActionPerformed
+
+    private void showCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCountryBtnActionPerformed
+        showCountryUI frame = new showCountryUI();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_showCountryBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +324,17 @@ public class ArxikoMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitBtn;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton manageDataBtn;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
