@@ -5,17 +5,13 @@
  */
 package controllers;
 
-import java.awt.Choice;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.Country;
 import models.Coviddata;
-import service.AppDatabase;
 import service.AppQueries;
-import service.LoadCovidData;
 import utils.Constants;
 
 /**
@@ -26,14 +22,16 @@ public class CountryController {
 
     /**
      *
-     * @param dropDown
+     * @return 
      */
-    public static void fillDropDown(Choice dropDown) {
-        List<Country> fetchedCountry = AppQueries.fetchCountries();
-        dropDown.add("");
-        fetchedCountry.forEach((country) -> {
-            dropDown.add(country.getName());
-        });
+    public static String[] getCountryNames() {
+        List<Country> countries = AppQueries.fetchCountries();
+        String[] names = new String[countries.size()];
+        
+        for (int i = 0; i < names.length; i++) {
+            names[i] = countries.get(i).getName();
+        }
+        return names;
     }
 
     /**
@@ -42,12 +40,14 @@ public class CountryController {
      * @param confirmedTable
      * @param recoveredTable
      * @param countryName
+     * @param fromDate
+     * @param toDate
      */
-    public static void fillTables(JTable deathsTable, JTable confirmedTable, JTable recoveredTable, String countryName) {
+    public static void fillTables(JTable deathsTable, JTable confirmedTable, JTable recoveredTable, String countryName, Date fromDate, Date toDate) {
         Country country = AppQueries.fetchCountryByName(countryName);
-        renderTableData(deathsTable, country, Constants.DATA_KIND_DEATHS);
-        renderTableData(confirmedTable, country, Constants.DATA_KIND_CONFIRMED);
-        renderTableData(recoveredTable, country, Constants.DATA_KIND_RECOVERED);
+        renderTableData(deathsTable, country, Constants.DATA_KIND_DEATHS, fromDate, toDate);
+        renderTableData(confirmedTable, country, Constants.DATA_KIND_CONFIRMED, fromDate, toDate);
+        renderTableData(recoveredTable, country, Constants.DATA_KIND_RECOVERED, fromDate, toDate);
 
     }
 
@@ -57,8 +57,8 @@ public class CountryController {
      * @param country
      * @param dataKind
      */
-    private static void renderTableData(JTable table, Country country, int dataKind) {
-        List<Coviddata> fetchedCoviddata = AppQueries.fetchCoviddata(country, dataKind);
+    private static void renderTableData(JTable table, Country country, int dataKind, Date fromDate, Date toDate) {
+        List<Coviddata> fetchedCoviddata = AppQueries.fetchCoviddata(country, dataKind, fromDate, toDate);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (Coviddata coviddata : fetchedCoviddata) {
             model.addRow(new Object[]{coviddata.getDatakind(), coviddata.getQty(), coviddata.getProodqty(), coviddata.getTrndate().toString()});

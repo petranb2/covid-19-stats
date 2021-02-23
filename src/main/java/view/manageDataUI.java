@@ -41,14 +41,12 @@ public class manageDataUI extends javax.swing.JFrame {
         insertDataBtn = new javax.swing.JButton();
         deleteCountryBtn = new javax.swing.JButton();
         deleteDataBtn = new javax.swing.JButton();
-        chooseCountry1ComboBox = new javax.swing.JComboBox<>();
-        chooseCountry2ComboBox = new javax.swing.JComboBox<>();
-        chooseCountry3ComboBox = new javax.swing.JComboBox<>();
         astheneisCheckBox = new javax.swing.JCheckBox();
         krousmataCheckBox = new javax.swing.JCheckBox();
         thanatoiCheckBox = new javax.swing.JCheckBox();
         label1 = new java.awt.Label();
         showCountryMenuBtn = new javax.swing.JButton();
+        returnBtn = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -112,18 +110,6 @@ public class manageDataUI extends javax.swing.JFrame {
             }
         });
 
-        chooseCountry1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        chooseCountry1ComboBox.setName(""); // NOI18N
-
-        chooseCountry2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        chooseCountry3ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        chooseCountry3ComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseCountry3ComboBoxActionPerformed(evt);
-            }
-        });
-
         astheneisCheckBox.setForeground(new java.awt.Color(102, 255, 255));
         astheneisCheckBox.setText("Ασθενείς που έχούν ανακάμψει");
         astheneisCheckBox.setOpaque(false);
@@ -162,53 +148,57 @@ public class manageDataUI extends javax.swing.JFrame {
             }
         });
 
+        returnBtn.setBackground(new java.awt.Color(0, 204, 204));
+        returnBtn.setText("Επιστροφή στο αρχικό Menu");
+        returnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(chooseCountry3ComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chooseCountry2ComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chooseCountry1ComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(insertDataBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(insertCountryBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(98, 98, 98)
+                    .addComponent(showCountryMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(astheneisCheckBox)
-                                    .addComponent(krousmataCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(thanatoiCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(deleteCountryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(showCountryMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 14, Short.MAX_VALUE))
+                                    .addComponent(astheneisCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(krousmataCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(thanatoiCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(insertDataBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(insertCountryBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(98, 98, 98)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(deleteCountryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(deleteDataBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(returnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGap(8, 8, 8))))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteCountryBtn, deleteDataBtn, insertCountryBtn, insertDataBtn, returnBtn, showCountryMenuBtn});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseCountry1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(astheneisCheckBox))
+                .addGap(26, 26, 26)
+                .addComponent(astheneisCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseCountry2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(krousmataCheckBox))
+                .addComponent(krousmataCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseCountry3ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(thanatoiCheckBox))
-                .addGap(49, 49, 49)
+                .addComponent(thanatoiCheckBox)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteCountryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertCountryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,8 +207,10 @@ public class manageDataUI extends javax.swing.JFrame {
                     .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(showCountryMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showCountryMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -231,7 +223,6 @@ public class manageDataUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1ActionPerformed
 
     private void insertCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertCountryBtnActionPerformed
-        // TODO add your handling code here:
 
         LoadCovidData loadData = new LoadCovidData(
                 thanatoiCheckBox.isSelected(),
@@ -253,20 +244,26 @@ public class manageDataUI extends javax.swing.JFrame {
 
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
 
-        // TODO add your handling code here:
-        DeleteCovidData deleteCovidData = new DeleteCovidData();
-        deleteCovidData.truncateCovidData();
+        Object[] options = {"Ναι", "Όχι"};
+        int answer = JOptionPane.showOptionDialog(null, "Πρόκειται να διαγραφούν τα δεδομένα των χωρών. Θέλετε να προχωρήσετε;",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (answer == JOptionPane.YES_OPTION) {
+
+            DeleteCovidData deleteCovidData = new DeleteCovidData();
+            deleteCovidData.truncateCovidData();
+        }
     }//GEN-LAST:event_deleteDataBtnActionPerformed
 
     private void deleteCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCountryBtnActionPerformed
-        // TODO add your handling code here:
-        DeleteCovidData deleteCovidData = new DeleteCovidData();
-        deleteCovidData.truncateCountries();
-    }//GEN-LAST:event_deleteCountryBtnActionPerformed
+        Object[] options = {"Ναι", "Όχι"};
+        int answer = JOptionPane.showOptionDialog(null, "Πρόκειται να διαγραφούν όλες οι χώρες. Θέλετε να προχωρήσετε;",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (answer == JOptionPane.YES_OPTION) {
 
-    private void chooseCountry3ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseCountry3ComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chooseCountry3ComboBoxActionPerformed
+            DeleteCovidData deleteCovidData = new DeleteCovidData();
+            deleteCovidData.truncateCountries();
+        }
+    }//GEN-LAST:event_deleteCountryBtnActionPerformed
 
     private void showCountryMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCountryMenuBtnActionPerformed
         // TODO add your handling code here:
@@ -281,6 +278,13 @@ public class manageDataUI extends javax.swing.JFrame {
     private void astheneisCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_astheneisCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_astheneisCheckBoxActionPerformed
+
+    private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
+
+        new ArxikoMenu().setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_returnBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,9 +332,6 @@ public class manageDataUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox astheneisCheckBox;
-    private javax.swing.JComboBox<String> chooseCountry1ComboBox;
-    private javax.swing.JComboBox<String> chooseCountry2ComboBox;
-    private javax.swing.JComboBox<String> chooseCountry3ComboBox;
     private javax.swing.JButton deleteCountryBtn;
     private javax.swing.JButton deleteDataBtn;
     private javax.swing.JButton insertCountryBtn;
@@ -342,6 +343,7 @@ public class manageDataUI extends javax.swing.JFrame {
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
+    private javax.swing.JButton returnBtn;
     private javax.swing.JButton showCountryMenuBtn;
     private javax.swing.JCheckBox thanatoiCheckBox;
     // End of variables declaration//GEN-END:variables

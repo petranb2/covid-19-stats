@@ -86,15 +86,17 @@ public class AppQueries {
      *
      * @param country
      * @param dataKind
-     * @param trnDate
+     * @param fromDate
+     * @param toDate
      * @return
      */
-    public static List<Coviddata> fetchCoviddata(Country country, int dataKind, Date trnDate) {
+    public static List<Coviddata> fetchCoviddata(Country country, int dataKind, Date fromDate, Date toDate) {
         EntityManager em = AppDatabase.getAppEntityManager();
-        Query namedQuery2 = em.createNamedQuery("Coviddata.findByCountryAndDataKindAndTrndate");
-        namedQuery2.setParameter("datakind", dataKind);
-        namedQuery2.setParameter("trndate", trnDate);
+        Query namedQuery2 = em.createNamedQuery("Coviddata.findByCountryAndDataKindByDateRange");
         namedQuery2.setParameter("country", country);
+        namedQuery2.setParameter("datakind", dataKind);
+        namedQuery2.setParameter("fromDate", fromDate);
+        namedQuery2.setParameter("toDate", toDate);
         List<Coviddata> fetchedCoviddata = (List<Coviddata>) namedQuery2.getResultList();
         return fetchedCoviddata;
     }
