@@ -142,17 +142,14 @@
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="chooseDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="showDiagramBtn" min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="showMapBtn" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chooseDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jDateChooser1" min="-2" pref="109" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jDateChooser1" min="-2" pref="109" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -164,18 +161,31 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="deleteDataBtn" min="-2" pref="194" max="-2" attributes="0"/>
                                       <Component id="returnBtn" min="-2" max="-2" attributes="0"/>
+                                      <Component id="deleteDataBtn" min="-2" pref="194" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="dataTab" min="-2" pref="489" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="confirmed_cb" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="deaths_cb" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="recovered_cb" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dataTab" min="-2" pref="489" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                  <Component id="cumulative_cb" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -204,12 +214,20 @@
                       </Group>
                       <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="confirmed_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deaths_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="recovered_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cumulative_cb" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="showDiagramBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="deleteDataBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="showMapBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="returnBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
@@ -222,7 +240,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="label2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="437" max="32767" attributes="0"/>
+                      <EmptySpace pref="812" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -235,6 +253,7 @@
               <Color blue="cc" green="cc" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x3a0;&#x3c1;&#x3bf;&#x3b2;&#x3bf;&#x3bb;&#x3ae; &#x3c3;&#x3b5; &#x3b4;&#x3b9;&#x3ac;&#x3b3;&#x3c1;&#x3b1;&#x3bc;&#x3bc;&#x3b1;"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3bb;&#x3ad;&#x3be;&#x3c4;&#x3b5; &#x3c4;&#x3b7;&#x3bd; &#x3c7;&#x3ce;&#x3c1;&#x3b1; &#x3c0;&#x3bf;&#x3c5; &#x3c3;&#x3b1;&#x3c2; &#x3b5;&#x3bd;&#x3b4;&#x3b9;&#x3b1;&#x3c6;&#x3ad;&#x3c1;&#x3b5;&#x3b9; &#x3ba;&#x3b1;&#x3b8;&#x3ce;&#x3c2; &#x3ba;&#x3b1;&#x3b9; &#x3c4;&#x3bf; &#x3b5;&#x3af;&#x3b4;&#x3bf;&#x3c2; &#x3c4;&#x3c9;&#x3bd; &#x3b4;&#x3b5;&#x3b4;&#x3bf;&#x3bc;&#x3ad;&#x3bd;&#x3c9;&#x3bd;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showDiagramBtnActionPerformed"/>
@@ -504,6 +523,30 @@
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="confirmed_cb">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CONFIRMED"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3b2;&#x3b5;&#x3b2;&#x3b1;&#x3b9;&#x3c9;&#x3bc;&#x3ad;&#x3bd;&#x3b1; &#x3ba;&#x3c1;&#x3bf;&#x3cd;&#x3c3;&#x3bc;&#x3b1;&#x3c4;&#x3b1;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="deaths_cb">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="DEATHS"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#x398;&#x3ac;&#x3bd;&#x3b1;&#x3c4;&#x3bf;&#x3b9;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="recovered_cb">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RECOVERED"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#x391;&#x3c3;&#x3b8;&#x3b5;&#x3bd;&#x3b5;&#x3af;&#x3c2; &#x3c0;&#x3bf;&#x3c5; &#x3ad;&#x3c7;&#x3bf;&#x3c5;&#x3bd; &#x3b1;&#x3bd;&#x3b1;&#x3ba;&#x3ac;&#x3bc;&#x3c8;&#x3b5;&#x3b9;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cumulative_cb">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Accumulated Data"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#x395;&#x3c0;&#x3b9;&#x3bb;&#x3ad;&#x3be;&#x3c4;&#x3b5; &#x3b3;&#x3b9;&#x3b1; &#x3c3;&#x3c9;&#x3c1;&#x3b5;&#x3c5;&#x3c4;&#x3b9;&#x3ba;&#x3ac; &#x3b4;&#x3b5;&#x3b4;&#x3bf;&#x3bc;&#x3ad;&#x3bd;&#x3b1;"/>
           </Properties>
         </Component>
       </SubComponents>
