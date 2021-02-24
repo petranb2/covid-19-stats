@@ -106,8 +106,8 @@ public class MapUIController {
         // TODO code application logic here
         String webpage = "src//main//resources//CovidMap-data.html";
         try {
-//            Runtime.getRuntime().exec("cmd /c start " + webpage); // For WINDOWS
-            Runtime.getRuntime().exec(new String[]{"/usr/bin/open", "-a", "/Applications/Google Chrome.app", webpage});
+            Runtime.getRuntime().exec("cmd /c start " + webpage); // For WINDOWS
+//            Runtime.getRuntime().exec(new String[]{"/usr/bin/open", "-a", "/Applications/Google Chrome.app", webpage});
 
         } catch (IOException ex) {
             Logger.getLogger(TestCovidMap.class.getName()).log(Level.SEVERE, null, ex);
