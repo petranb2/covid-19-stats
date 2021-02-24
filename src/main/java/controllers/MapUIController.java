@@ -92,8 +92,12 @@ public class MapUIController {
                 script += node.getWholeData();
                 node.setWholeData(script);
                 return node;
+            }).forEachOrdered((node) -> {
+                System.out.println(node.getWholeData());
             });
             return element;
+        }).forEachOrdered((_item) -> {
+            System.out.println("-------------------");
         });
         try {
             FileWriter myWriter = new FileWriter("src\\main\\resources\\CovidMap-data.html");
