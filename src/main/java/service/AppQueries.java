@@ -105,13 +105,17 @@ public class AppQueries {
      *
      * @param country
      * @param dataKind
+     * @param fromDate
+     * @param toDate
      * @return
      */
-    public static Integer fetchSumCoviddata(Country country, int dataKind) {
+    public static Integer fetchSumCoviddata(Country country, int dataKind, Date fromDate, Date toDate) {
         EntityManager em = AppDatabase.getAppEntityManager();
-        Query namedQuery2 = em.createNativeQuery("SELECT SUM(cd.QTY) as total  FROM ROOT.COVIDDATA cd where cd.COUNTRY=? and cd.DATAKIND=?");
+        Query namedQuery2 = em.createNativeQuery("SELECT SUM(cd.QTY) as total  FROM ROOT.COVIDDATA cd where cd.COUNTRY=? and cd.DATAKIND=? and cd.trndate >= ? and cd.trndate <= ?");
         namedQuery2.setParameter(1, country.getCountry());
         namedQuery2.setParameter(2, dataKind);
+        namedQuery2.setParameter(3, fromDate);
+        namedQuery2.setParameter(4, toDate);
         Integer totalCases = (Integer) namedQuery2.getSingleResult();
         if (totalCases == null) {
             return -1;
