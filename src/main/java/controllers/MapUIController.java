@@ -81,7 +81,7 @@ public class MapUIController {
         rootJSONArray.toString();
         System.out.println(rootJSONArray.toString());
         File input;
-        input = new File("src\\main\\resources\\CovidMap.html");
+        input = new File("src//main//resources//CovidMap.html");
         Document doc = Jsoup.parse(input, "UTF-8");
         Elements scriptElements = doc.getElementsByTag("script");
 
@@ -100,7 +100,7 @@ public class MapUIController {
             System.out.println("-------------------");
         });
         try {
-            FileWriter myWriter = new FileWriter("src\\main\\resources\\CovidMap-data.html");
+            FileWriter myWriter = new FileWriter("src//main//resources//CovidMap-data.html");
             myWriter.write(doc.html());
             myWriter.close();
         } catch (IOException e) {
@@ -108,9 +108,11 @@ public class MapUIController {
             e.printStackTrace();
         }
         // TODO code application logic here
-        String webpage = "src\\main\\resources\\CovidMap-data.html";
+        String webpage = "src//main//resources//CovidMap-data.html";
         try {
-            Runtime.getRuntime().exec("cmd /c start " + webpage);
+            Runtime.getRuntime().exec("cmd /c start " + webpage); // For WINDOWS
+//            Runtime.getRuntime().exec(new String[]{"/usr/bin/open", "-a", "/Applications/Google Chrome.app", webpage});
+
         } catch (IOException ex) {
             Logger.getLogger(TestCovidMap.class.getName()).log(Level.SEVERE, null, ex);
         }
