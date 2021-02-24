@@ -44,6 +44,31 @@ public class AppQueries {
 
     /**
      *
+     * @return
+     */
+    public static List<Country> fetchCountriesExclude(String countryName) {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery = em.createNamedQuery("Country.excludeCountry");
+        namedQuery.setParameter("name", countryName);
+        List<Country> fetchedCountries = (List<Country>) namedQuery.getResultList();
+        return fetchedCountries;
+    }
+
+    /**
+     *
+     * @param country
+     * @return
+     */
+    public static Coviddata fetchCoviddata(Country country) {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery = em.createNamedQuery("Coviddata.findByCountry");
+        namedQuery.setParameter("country", country);
+        Coviddata fetchedCoviddata = (Coviddata) namedQuery.getSingleResult();
+        return fetchedCoviddata;
+    }
+
+    /**
+     *
      * @param country
      * @param dataKind
      * @return
@@ -74,5 +99,27 @@ public class AppQueries {
         namedQuery2.setParameter("toDate", toDate);
         List<Coviddata> fetchedCoviddata = (List<Coviddata>) namedQuery2.getResultList();
         return fetchedCoviddata;
+    }
+
+    /**
+     *
+     * @param country
+     * @param dataKind
+     * @param fromDate
+     * @param toDate
+     * @return
+     */
+    public static Integer fetchSumCoviddata(Country country, int dataKind, Date fromDate, Date toDate) {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery2 = em.createNativeQuery("SELECT SUM(cd.QTY) as total  FROM ROOT.COVIDDATA cd where cd.COUNTRY=? and cd.DATAKIND=? and cd.trndate >= ? and cd.trndate <= ?");
+        namedQuery2.setParameter(1, country.getCountry());
+        namedQuery2.setParameter(2, dataKind);
+        namedQuery2.setParameter(3, fromDate);
+        namedQuery2.setParameter(4, toDate);
+        Integer totalCases = (Integer) namedQuery2.getSingleResult();
+        if (totalCases == null) {
+            return -1;
+        }
+        return totalCases;
     }
 }

@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Country.findByCountry", query = "SELECT c FROM Country c WHERE c.country = :country")
     , @NamedQuery(name = "Country.findByName", query = "SELECT c FROM Country c WHERE c.name = :name")
     , @NamedQuery(name = "Country.findByLat", query = "SELECT c FROM Country c WHERE c.lat = :lat")
-    , @NamedQuery(name = "Country.findByLong1", query = "SELECT c FROM Country c WHERE c.long1 = :long1")})
+    , @NamedQuery(name = "Country.findByLong1", query = "SELECT c FROM Country c WHERE c.long1 = :long1")
+    , @NamedQuery(name = "Country.excludeCountry", query = "SELECT c FROM Country c WHERE c.name != :name")})
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -134,5 +135,5 @@ public class Country implements Serializable {
     public String toString() {
         return "models.Country[ country=" + country + " ]";
     }
-    
+
 }
