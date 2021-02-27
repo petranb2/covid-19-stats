@@ -34,8 +34,8 @@ public class DeleteCovidData {
     public void truncateCovidData(Country country) {
         EntityManager em = AppDatabase.getAppEntityManager();
         em.getTransaction().begin();
-        Query q = em.createNativeQuery("DELETE FROM ROOT.COVIDDATA WHERE ROOT.COVIDDATA.COUNTRY = :countryFK");
-        q.setParameter("countryFK", country.getCountry());
+        Query q = em.createNativeQuery("DELETE FROM ROOT.COVIDDATA WHERE ROOT.COVIDDATA.COUNTRY = ?");
+        q.setParameter(1, country.getCountry());
         int executeUpdate = q.executeUpdate();
         em.getTransaction().commit();
         System.out.println("executeUpdate :" + executeUpdate);
