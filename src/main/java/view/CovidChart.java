@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,24 +17,29 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
+import models.Country;
+import models.Coviddata;
+import service.AppQueries;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import service.LoadCovidData;
+import utils.Constants;
 
 /**
  *
  * @author kalogeros
  */
-public class CovidChart extends ApplicationFrame {
-
-    /**
-     * Creates a new demo.
-     *
-     * @param title the frame title.
-     */
-    public CovidChart(final String title) {
+public class CovidChart extends JFrame {
+    public CovidChart(final String title, String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
         super(title);
-        final CategoryDataset dataset = createDataset();
+        final CategoryDataset dataset = createDataset(countryName, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(500, 270));
+        chartPanel.setPreferredSize(new Dimension(800, 400));
+        chartPanel.setMouseWheelEnabled(true);
+
         setContentPane(chartPanel);
     }
 
@@ -44,55 +48,45 @@ public class CovidChart extends ApplicationFrame {
      *
      * @return The dataset.
      */
-    private CategoryDataset createDataset() {
-
+    private CategoryDataset createDataset(String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
+        
         // row keys...
-        final String series1 = "First";
-        final String series2 = "Second";
-        final String series3 = "Third";
-
-        // column keys...
-        final String type1 = "Type 1";
-        final String type2 = "Type 2";
-        final String type3 = "Type 3";
-        final String type4 = "Type 4";
-        final String type5 = "Type 5";
-        final String type6 = "Type 6";
-        final String type7 = "Type 7";
-        final String type8 = "Type 8";
-
+        final String series1 = "Confirmed";
+        final String series2 = "Deaths";
+        final String series3 = "Recovered";
+        
         // create the dataset...
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(1.0, series1, type1);
-        dataset.addValue(4.0, series1, type2);
-        dataset.addValue(3.0, series1, type3);
-        dataset.addValue(5.0, series1, type4);
-        dataset.addValue(5.0, series1, type5);
-        dataset.addValue(7.0, series1, type6);
-        dataset.addValue(7.0, series1, type7);
-        dataset.addValue(8.0, series1, type8);
-
-        dataset.addValue(5.0, series2, type1);
-        dataset.addValue(7.0, series2, type2);
-        dataset.addValue(6.0, series2, type3);
-        dataset.addValue(8.0, series2, type4);
-        dataset.addValue(4.0, series2, type5);
-        dataset.addValue(4.0, series2, type6);
-        dataset.addValue(2.0, series2, type7);
-        dataset.addValue(1.0, series2, type8);
-
-        dataset.addValue(4.0, series3, type1);
-        dataset.addValue(3.0, series3, type2);
-        dataset.addValue(2.0, series3, type3);
-        dataset.addValue(3.0, series3, type4);
-        dataset.addValue(6.0, series3, type5);
-        dataset.addValue(3.0, series3, type6);
-        dataset.addValue(4.0, series3, type7);
-        dataset.addValue(3.0, series3, type8);
+        
+        // column keys...       
+        // FIX THIS:
+        Country country = AppQueries.fetchCountryByName(countryName);        
+        if(confirmedDataNeeded){
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
+            for (Coviddata coviddata : fetchedConfirmeddata) {
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series1, coviddata.getTrndate().toString());
+            }
+        }
+        if(deathsDataNeeded){
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_DEATHS, startDate, endDate);
+            for (Coviddata coviddata : fetchedConfirmeddata) {
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series2, coviddata.getTrndate().toString());
+            }
+        }
+        if(recoveredDataNeeded){
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_RECOVERED, startDate, endDate);
+            for (Coviddata coviddata : fetchedConfirmeddata) {
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series3, coviddata.getTrndate().toString());  
+            }
+        }
+                
+//        List<Coviddata> fetchedCoviddata = AppQueries.fetchCoviddata(country, 1);                               
+//        for (int i = 0; i < 2; i++) {
+//            System.out.println(fetchedCoviddata.get(i).getQty());
+//            dataset.addValue(fetchedCoviddata.get(i).getQty(), series1, fetchedCoviddata.get(i).getTrndate().toString());
+//        }
 
         return dataset;
-
     }
 
     /**
@@ -106,22 +100,17 @@ public class CovidChart extends ApplicationFrame {
 
         // create the chart...
         final JFreeChart chart = ChartFactory.createLineChart(
-                "Line Chart Demo 1", // chart title
-                "Type", // domain axis label
-                "Value", // range axis label
-                dataset, // data
-                PlotOrientation.VERTICAL, // orientation
-                true, // include legend
-                true, // tooltips
-                false // urls
+            "Covid-19 Data Chart",     // chart title
+            "Time",                    // domain axis label
+            "Quantity (Persons)",      // range axis label
+            dataset,                   // data
+            PlotOrientation.VERTICAL,  // orientation
+            true,                      // include legend
+            true,                      // tooltips
+            false                      // urls
         );
 
-        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-//        final StandardLegend legend = (StandardLegend) chart.getLegend();
-        //      legend.setDisplaySeriesShapes(true);
-        //    legend.setShapeScaleX(1.5);
-        //  legend.setShapeScaleY(1.5);
-        //legend.setDisplaySeriesLines(true);
+       
         chart.setBackgroundPaint(Color.white);
 
         final CategoryPlot plot = (CategoryPlot) chart.getPlot();
@@ -133,16 +122,6 @@ public class CovidChart extends ApplicationFrame {
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         rangeAxis.setAutoRangeIncludesZero(true);
 
-        // ****************************************************************************
-        // * JFREECHART DEVELOPER GUIDE                                               *
-        // * The JFreeChart Developer Guide, written by David Gilbert, is available   *
-        // * to purchase from Object Refinery Limited:                                *
-        // *                                                                          *
-        // * http://www.object-refinery.com/jfreechart/guide.html                     *
-        // *                                                                          *
-        // * Sales are used to provide funding for the JFreeChart project - please    * 
-        // * support us so that we can continue developing free software.             *
-        // ****************************************************************************
         // customise the renderer...
         final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
 //        renderer.setDrawShapes(true);

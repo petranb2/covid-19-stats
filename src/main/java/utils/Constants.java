@@ -25,4 +25,6 @@ public class Constants {
     public static final String CONFIRMED_URL = "https://covid2019-api.herokuapp.com/timeseries/confirmed";
     public static final String DEATHS_URL = "https://covid2019-api.herokuapp.com/timeseries/deaths";
     public static final String RECOVERED_URL = "https://covid2019-api.herokuapp.com/timeseries/recovered";
+    public static final String TEMPLATE_MAP_HTML = "src\\main\\resources\\CovidMap.html";
+    public static final String HTML_MAP_WITH_DATA = "src\\main\\resources\\CovidMap-data.html";
 }
