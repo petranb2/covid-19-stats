@@ -23,6 +23,7 @@ import service.AppQueries;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import service.LoadCovidData;
 import utils.Constants;
 
@@ -30,13 +31,15 @@ import utils.Constants;
  *
  * @author kalogeros
  */
-public class CovidChart extends ApplicationFrame {
-    public CovidChart(final String title, String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded) {
+public class CovidChart extends JFrame {
+    public CovidChart(final String title, String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
         super(title);
-        final CategoryDataset dataset = createDataset(countryName, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded);
+        final CategoryDataset dataset = createDataset(countryName, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(800, 400));
+        chartPanel.setMouseWheelEnabled(true);
+
         setContentPane(chartPanel);
     }
 
@@ -45,7 +48,7 @@ public class CovidChart extends ApplicationFrame {
      *
      * @return The dataset.
      */
-    private CategoryDataset createDataset(String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded) {
+    private CategoryDataset createDataset(String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
         
         // row keys...
         final String series1 = "Confirmed";
@@ -59,19 +62,19 @@ public class CovidChart extends ApplicationFrame {
         // FIX THIS:
         Country country = AppQueries.fetchCountryByName(countryName);        
         if(confirmedDataNeeded){
-            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_CONFIRMED);
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
                 dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series1, coviddata.getTrndate().toString());
             }
         }
         if(deathsDataNeeded){
-            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_DEATHS);
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_DEATHS, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
                 dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series2, coviddata.getTrndate().toString());
             }
         }
         if(recoveredDataNeeded){
-            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_RECOVERED);
+            List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_RECOVERED, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
                 dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series3, coviddata.getTrndate().toString());  
             }
