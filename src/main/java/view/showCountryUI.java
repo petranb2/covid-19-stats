@@ -254,6 +254,11 @@ public class showCountryUI extends javax.swing.JFrame {
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         });
         jScrollPane1.setViewportView(deathsTable);
 
@@ -266,7 +271,20 @@ public class showCountryUI extends javax.swing.JFrame {
             new String [] {
                 "DATAKIND", "QTY", "PROODQTY", "TRNDATE"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
         jScrollPane2.setViewportView(recoveredTable);
 
         dataTab.addTab("RECOVERED", jScrollPane2);
@@ -278,7 +296,20 @@ public class showCountryUI extends javax.swing.JFrame {
             new String [] {
                 "DATAKIND", "QTY", "PROODQTY", "TRNDATE"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
         jScrollPane3.setViewportView(confirmedTable);
 
         dataTab.addTab("CONFIRMED", jScrollPane3);
@@ -288,7 +319,7 @@ public class showCountryUI extends javax.swing.JFrame {
         jDateChooser2.setDateFormatString("dd-MM-yyyy");
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHART", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(102, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHART", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 255, 255))); // NOI18N
         jPanel3.setForeground(new java.awt.Color(102, 255, 255));
 
         cumulative_cb.setBackground(new java.awt.Color(0, 102, 102));
@@ -445,6 +476,7 @@ public class showCountryUI extends javax.swing.JFrame {
         Boolean deathsDataNeeded = deaths_cb.isSelected();
         Boolean recoveredDataNeeded = recovered_cb.isSelected();
         Boolean cumulativeDataNeeded = cumulative_cb.isSelected();
+<<<<<<< HEAD
 
         if (!selectedCountry.equals("")
                 && (confirmedDataNeeded || deathsDataNeeded || recoveredDataNeeded)) {
@@ -454,7 +486,24 @@ public class showCountryUI extends javax.swing.JFrame {
             chart.setVisible(true);
         } else {
             System.out.println("Please select Country and/or the kind of data you would like to plot!");
+=======
+        
+        if (selectedCountry.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Παρακαλώ επιλέξτε χώρα!",
+                    "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
+            return;
+>>>>>>> ref: Additions for Show Country and Show Map views.
         }
+        
+        if (!confirmedDataNeeded && !deathsDataNeeded && !recoveredDataNeeded) {
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί κανένας τύπος δεδομένων!",
+                    "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        final CovidChart chart = new CovidChart("Covid-19 Data Chart", selectedCountry, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
     }//GEN-LAST:event_showDiagramBtnActionPerformed
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
@@ -466,8 +515,13 @@ public class showCountryUI extends javax.swing.JFrame {
 
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
         if (countryName.isEmpty()) {
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(null, "Δεν έχετε επιλέξει χώρα!",
                     "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+=======
+            JOptionPane.showMessageDialog(null, "Παρακαλώ επιλέξτε χώρα!",
+                "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+>>>>>>> ref: Additions for Show Country and Show Map views.
             return;
         }
 
@@ -481,6 +535,7 @@ public class showCountryUI extends javax.swing.JFrame {
                 DeleteCovidData deleteCovidData = new DeleteCovidData();
                 // TODO: Delete covid data for the specified date range
                 deleteCovidData.truncateCovidData(country);
+                updateTables();
                 JOptionPane.showMessageDialog(null, "Η διαγραφή των δεδομένων ήταν επιτυχής!",
                         "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
             } else {

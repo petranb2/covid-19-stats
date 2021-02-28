@@ -205,7 +205,7 @@ public class manageDataUI extends javax.swing.JFrame {
         Titlos1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Titlos1.setForeground(new java.awt.Color(0, 204, 204));
         Titlos1.setMinimumSize(new java.awt.Dimension(500, 50));
-        Titlos1.setText("ΔΙΑΧΕΙΡΗΣΗ ΔΕΔΟΜΕΝΩΝ Covid -19");
+        Titlos1.setText("ΔΙΑΧΕΙΡΙΣΗ ΔΕΔΟΜΕΝΩΝ Covid -19");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

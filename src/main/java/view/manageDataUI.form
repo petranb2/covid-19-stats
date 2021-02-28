@@ -415,7 +415,7 @@
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[500, 50]"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x394;&#x399;&#x391;&#x3a7;&#x395;&#x399;&#x3a1;&#x397;&#x3a3;&#x397; &#x394;&#x395;&#x394;&#x39f;&#x39c;&#x395;&#x39d;&#x3a9;&#x39d; Covid -19"/>
+            <Property name="text" type="java.lang.String" value="&#x394;&#x399;&#x391;&#x3a7;&#x395;&#x399;&#x3a1;&#x399;&#x3a3;&#x397; &#x394;&#x395;&#x394;&#x39f;&#x39c;&#x395;&#x39d;&#x3a9;&#x39d; Covid -19"/>
           </Properties>
         </Component>
       </SubComponents>

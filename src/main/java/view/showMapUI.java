@@ -193,6 +193,10 @@ public class showMapUI extends javax.swing.JFrame {
             }
         });
 
+        jDateChooser1.setDateFormatString("dd-MM-yyyy");
+
+        jDateChooser2.setDateFormatString("dd-MM-yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -293,6 +297,12 @@ public class showMapUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1ActionPerformed
 
     private void showMapBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapBtnActionPerformed
+        if (countriesChoice.getSelectedItem().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Παρακαλώ επιλέξτε χώρα!",
+                    "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         try {
             // TODO add your handling code here:
             MapUIController.showMap(countriesChoice.getSelectedItem(), selectedCountriesList, startDate, endDate);
