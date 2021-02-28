@@ -1,12 +1,14 @@
 package view;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.text.ParseException;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -16,39 +18,80 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.ApplicationFrame;
 import models.Country;
 import models.Coviddata;
 import service.AppQueries;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import service.LoadCovidData;
+import javax.swing.JPanel;
 import utils.Constants;
 
-/**
- *
- * @author kalogeros
- */
 public class CovidChart extends JFrame {
     public CovidChart(final String title, String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
         super(title);
         final CategoryDataset dataset = createDataset(countryName, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart);
+        
         chartPanel.setPreferredSize(new Dimension(800, 400));
         chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setMouseZoomable(true);
+        chartPanel.setHorizontalAxisTrace(true);
+        chartPanel.setVerticalAxisTrace(true);
+        
+        this.setLayout(new BorderLayout(0, 5));
+        this.add(chartPanel, BorderLayout.CENTER);
+                
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.add(createZoom(chartPanel));
+        panel.add(createTrace(chartPanel));
+        this.add(panel, BorderLayout.SOUTH);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
-        setContentPane(chartPanel);
+//        setContentPane(chartPanel);
+    }
+    
+    private JButton createZoom(ChartPanel chartPanel) {
+        final JButton auto = new JButton(new AbstractAction("Reset") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) { chartPanel.restoreAutoBounds(); }
+        });
+        return auto;
+    }
+    
+    private JComboBox createTrace(ChartPanel chartPanel) {
+        final JComboBox trace = new JComboBox();
+        final String[] traceCmds = {"Rulers On", "Rulers Off"};
+        trace.setModel(new DefaultComboBoxModel(traceCmds));
+        trace.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (traceCmds[0].equals(trace.getSelectedItem())) {
+                    chartPanel.setHorizontalAxisTrace(true);
+                    chartPanel.setVerticalAxisTrace(true);
+                    chartPanel.repaint();
+                } else {
+                    chartPanel.setHorizontalAxisTrace(false);
+                    chartPanel.setVerticalAxisTrace(false);
+                    chartPanel.repaint();
+                }
+            }
+        });
+        return trace;
     }
 
-    /**
-     * Creates a sample dataset.
-     *
-     * @return The dataset.
-     */
     private CategoryDataset createDataset(String countryName, Boolean confirmedDataNeeded, Boolean deathsDataNeeded, Boolean recoveredDataNeeded, Boolean cumulativeDataNeeded, Date startDate, Date endDate) {
+        
+        // Date formater for the chart
+        SimpleDateFormat dateFormater = new SimpleDateFormat("MM-dd-yy");
         
         // row keys...
         final String series1 = "Confirmed";
@@ -59,45 +102,31 @@ public class CovidChart extends JFrame {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         // column keys...       
-        // FIX THIS:
         Country country = AppQueries.fetchCountryByName(countryName);        
         if(confirmedDataNeeded){
             List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
-                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series1, coviddata.getTrndate().toString());
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series1, dateFormater.format(coviddata.getTrndate()));
             }
         }
         if(deathsDataNeeded){
             List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_DEATHS, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
-                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series2, coviddata.getTrndate().toString());
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series2, dateFormater.format(coviddata.getTrndate()));
             }
         }
         if(recoveredDataNeeded){
             List<Coviddata> fetchedConfirmeddata = AppQueries.fetchCoviddata(country, Constants.DATA_KIND_RECOVERED, startDate, endDate);
             for (Coviddata coviddata : fetchedConfirmeddata) {
-                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series3, coviddata.getTrndate().toString());  
+                dataset.addValue(cumulativeDataNeeded ? coviddata.getProodqty() : coviddata.getQty(), series3, dateFormater.format(coviddata.getTrndate()));  
             }
         }
-                
-//        List<Coviddata> fetchedCoviddata = AppQueries.fetchCoviddata(country, 1);                               
-//        for (int i = 0; i < 2; i++) {
-//            System.out.println(fetchedCoviddata.get(i).getQty());
-//            dataset.addValue(fetchedCoviddata.get(i).getQty(), series1, fetchedCoviddata.get(i).getTrndate().toString());
-//        }
 
         return dataset;
     }
 
-    /**
-     * Creates a sample chart.
-     *
-     * @param dataset a dataset.
-     *
-     * @return The chart.
-     */
-    private JFreeChart createChart(final CategoryDataset dataset) {
 
+    private JFreeChart createChart(final CategoryDataset dataset) {
         // create the chart...
         final JFreeChart chart = ChartFactory.createLineChart(
             "Covid-19 Data Chart",     // chart title
@@ -109,8 +138,7 @@ public class CovidChart extends JFrame {
             true,                      // tooltips
             false                      // urls
         );
-
-       
+      
         chart.setBackgroundPaint(Color.white);
 
         final CategoryPlot plot = (CategoryPlot) chart.getPlot();
@@ -124,28 +152,9 @@ public class CovidChart extends JFrame {
 
         // customise the renderer...
         final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-//        renderer.setDrawShapes(true);
-
-        renderer.setSeriesStroke(
-                0, new BasicStroke(
-                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-                        1.0f, new float[]{10.0f, 6.0f}, 0.0f
-                )
-        );
-        renderer.setSeriesStroke(
-                1, new BasicStroke(
-                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-                        1.0f, new float[]{6.0f, 6.0f}, 0.0f
-                )
-        );
-        renderer.setSeriesStroke(
-                2, new BasicStroke(
-                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-                        1.0f, new float[]{2.0f, 6.0f}, 0.0f
-                )
-        );
-        // OPTIONAL CUSTOMISATION COMPLETED.
-
+        renderer.setSeriesStroke(0, new BasicStroke( 2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[]{10.0f, 6.0f}, 0.0f ));
+        renderer.setSeriesStroke(1, new BasicStroke( 2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[]{6.0f, 6.0f}, 0.0f));
+        renderer.setSeriesStroke(2, new BasicStroke( 2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[]{2.0f, 6.0f}, 0.0f));
         return chart;
     }
 }
