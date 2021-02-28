@@ -41,7 +41,7 @@ public class AppQueries {
         List<Country> fetchedCountries = (List<Country>) namedQuery.getResultList();
         return fetchedCountries;
     }
-
+    
     /**
      *
      * @return
@@ -52,6 +52,28 @@ public class AppQueries {
         namedQuery.setParameter("name", countryName);
         List<Country> fetchedCountries = (List<Country>) namedQuery.getResultList();
         return fetchedCountries;
+    }
+    
+    /**
+     * Retrieves the number of rows from Country table.
+     * 
+     * @return
+     */
+    public static long fetchCountryCount() {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery = em.createNamedQuery("Country.getRowCount");
+        return (long) namedQuery.getSingleResult();
+    }
+    
+    /**
+     * Retrieves the number of rows from Coviddata table.
+     * 
+     * @return
+     */
+    public static long fetchCoviddataCount() {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery = em.createNamedQuery("Coviddata.getRowCount");
+        return (long) namedQuery.getSingleResult();
     }
 
     /**
@@ -65,6 +87,19 @@ public class AppQueries {
         namedQuery.setParameter("country", country);
         Coviddata fetchedCoviddata = (Coviddata) namedQuery.getSingleResult();
         return fetchedCoviddata;
+    }
+    
+    /**
+     * Retrieves the number of rows for the specified country from Coviddata table.
+     * 
+     * @param country
+     * @return
+     */
+    public static long fetchCoviddataCount(Country country) {
+        EntityManager em = AppDatabase.getAppEntityManager();
+        Query namedQuery = em.createNamedQuery("Coviddata.getRowCountByCountry");
+        namedQuery.setParameter("country", country);
+        return (long) namedQuery.getSingleResult();
     }
 
     /**
