@@ -101,16 +101,15 @@ public class showCountryUI extends javax.swing.JFrame {
         returnBtn = new javax.swing.JButton();
         chooseDateLabel = new java.awt.Label();
         choice1 = new java.awt.Choice();
-        label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
         dataTab = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        deathsTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         recoveredTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         confirmedTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        deathsTable = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
@@ -119,6 +118,8 @@ public class showCountryUI extends javax.swing.JFrame {
         deaths_cb = new javax.swing.JCheckBox();
         recovered_cb = new javax.swing.JCheckBox();
         showDiagramBtn1 = new javax.swing.JButton();
+        label5 = new java.awt.Label();
+        Titlos1 = new java.awt.Label();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -187,14 +188,22 @@ public class showCountryUI extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Covid-19-Stats");
+        setTitle("Προβολή δεδομένων Covid-19 ανά χώρα");
+        setMinimumSize(new java.awt.Dimension(1100, 700));
+        setPreferredSize(new java.awt.Dimension(1100, 700));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         showDiagramBtn.setBackground(new java.awt.Color(0, 204, 204));
+        showDiagramBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        showDiagramBtn.setForeground(new java.awt.Color(0, 102, 102));
         showDiagramBtn.setText("ΠΡΟΒΟΛΗ ΣΕ ΔΙΑΓΡΑΜΜΑ");
         showDiagramBtn.setToolTipText("Επιλέξτε την χώρα που σας ενδιαφέρει καθώς και το είδος των δεδομένων");
+        showDiagramBtn.setMaximumSize(new java.awt.Dimension(225, 50));
+        showDiagramBtn.setMinimumSize(new java.awt.Dimension(225, 50));
+        showDiagramBtn.setName(""); // NOI18N
+        showDiagramBtn.setPreferredSize(new java.awt.Dimension(225, 50));
         showDiagramBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showDiagramBtnActionPerformed(evt);
@@ -202,7 +211,12 @@ public class showCountryUI extends javax.swing.JFrame {
         });
 
         deleteDataBtn.setBackground(new java.awt.Color(0, 204, 204));
+        deleteDataBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteDataBtn.setForeground(new java.awt.Color(0, 102, 102));
         deleteDataBtn.setText("ΔΙΑΓΡΑΦΗ ΔΕΔΟΜΕΝΩΝ");
+        deleteDataBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        deleteDataBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        deleteDataBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         deleteDataBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteDataBtnActionPerformed(evt);
@@ -210,7 +224,12 @@ public class showCountryUI extends javax.swing.JFrame {
         });
 
         returnBtn.setBackground(new java.awt.Color(0, 204, 204));
-        returnBtn.setText("ΑΡΧΙΚΟ MENU");
+        returnBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(0, 102, 102));
+        returnBtn.setText("ΕΠΙΣΤΡΟΦΗ ΣΤΟ ΑΡΧΙΚΟ MENU");
+        returnBtn.setMaximumSize(new java.awt.Dimension(350, 50));
+        returnBtn.setMinimumSize(new java.awt.Dimension(350, 50));
+        returnBtn.setPreferredSize(new java.awt.Dimension(350, 50));
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnBtnActionPerformed(evt);
@@ -219,50 +238,28 @@ public class showCountryUI extends javax.swing.JFrame {
 
         chooseDateLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         chooseDateLabel.setForeground(new java.awt.Color(102, 255, 255));
-        chooseDateLabel.setText("Επιλεξτε ημερομηνια");
+        chooseDateLabel.setText("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
 
+        choice1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        choice1.setMaximumSize(new java.awt.Dimension(200, 40));
+        choice1.setMinimumSize(new java.awt.Dimension(200, 40));
+        choice1.setPreferredSize(new java.awt.Dimension(200, 40));
         choice1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 choice1ItemStateChanged(evt);
             }
         });
 
-        label2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        label2.setForeground(new java.awt.Color(102, 255, 255));
-        label2.setText("Επιλεξτε χωρα");
-
         label3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label3.setForeground(new java.awt.Color(102, 255, 255));
-        label3.setText("Εως");
+        label3.setText("ΕΩΣ");
 
         label4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label4.setForeground(new java.awt.Color(102, 255, 255));
-        label4.setText("Απο");
+        label4.setText("ΑΠΟ");
 
-        deathsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Data Kind", "QTY", "PROODQTY", "TRNDATE"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        });
-        jScrollPane1.setViewportView(deathsTable);
-
-        dataTab.addTab("DEATHS", jScrollPane1);
+        dataTab.setMaximumSize(new java.awt.Dimension(457, 430));
+        dataTab.setMinimumSize(new java.awt.Dimension(457, 430));
 
         recoveredTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -314,9 +311,41 @@ public class showCountryUI extends javax.swing.JFrame {
 
         dataTab.addTab("CONFIRMED", jScrollPane3);
 
+        deathsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data Kind", "QTY", "PROODQTY", "TRNDATE"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        jScrollPane1.setViewportView(deathsTable);
+
+        dataTab.addTab("DEATHS", jScrollPane1);
+
         jDateChooser1.setDateFormatString("dd-MM-yyyy");
+        jDateChooser1.setMaximumSize(new java.awt.Dimension(150, 30));
+        jDateChooser1.setMinimumSize(new java.awt.Dimension(150, 30));
+        jDateChooser1.setPreferredSize(new java.awt.Dimension(150, 30));
+        jDateChooser1.setRequestFocusEnabled(false);
 
         jDateChooser2.setDateFormatString("dd-MM-yyyy");
+        jDateChooser2.setMaximumSize(new java.awt.Dimension(150, 30));
+        jDateChooser2.setMinimumSize(new java.awt.Dimension(150, 30));
+        jDateChooser2.setPreferredSize(new java.awt.Dimension(150, 30));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHART", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 255, 255))); // NOI18N
@@ -371,13 +400,27 @@ public class showCountryUI extends javax.swing.JFrame {
         );
 
         showDiagramBtn1.setBackground(new java.awt.Color(0, 204, 204));
+        showDiagramBtn1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        showDiagramBtn1.setForeground(new java.awt.Color(0, 102, 102));
         showDiagramBtn1.setText("ΠΡΟΒΟΛΗ ΣΕ ΧΑΡΤΗ");
         showDiagramBtn1.setToolTipText("Επιλέξτε την χώρα που σας ενδιαφέρει καθώς και το είδος των δεδομένων");
+        showDiagramBtn1.setMaximumSize(new java.awt.Dimension(225, 50));
+        showDiagramBtn1.setMinimumSize(new java.awt.Dimension(225, 50));
+        showDiagramBtn1.setPreferredSize(new java.awt.Dimension(225, 50));
         showDiagramBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showDiagramBtn1ActionPerformed(evt);
             }
         });
+
+        label5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        label5.setForeground(new java.awt.Color(102, 255, 255));
+        label5.setText("ΕΠΙΛΕΞΤΕ ΧΩΡΑ");
+
+        Titlos1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Titlos1.setForeground(new java.awt.Color(0, 204, 204));
+        Titlos1.setMinimumSize(new java.awt.Dimension(500, 50));
+        Titlos1.setText("ΠΡΟΒΟΛΗ ΔΕΔΟΜΕΝΩΝ Covid-19 ΑΝΑ ΧΩΡΑ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -386,76 +429,74 @@ public class showCountryUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(90, 90, 90)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(2, 2, 2))))))
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(returnBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                            .addComponent(deleteDataBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(showDiagramBtn)
+                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(returnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteDataBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(79, 79, 79)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(905, Short.MAX_VALUE)))
+                        .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50)
+                .addComponent(dataTab, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(214, Short.MAX_VALUE)
+                .addComponent(Titlos1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(333, 333, 333))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(Titlos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(50, 50, 50)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(759, Short.MAX_VALUE)))
+                            .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(chooseDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(3, 3, 3)
+                                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         chooseDateLabel.getAccessibleContext().setAccessibleDescription("");
@@ -599,6 +640,7 @@ public class showCountryUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label Titlos1;
     private java.awt.Choice choice1;
     private java.awt.Label chooseDateLabel;
     private javax.swing.JTable confirmedTable;
@@ -620,9 +662,9 @@ public class showCountryUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
+    private java.awt.Label label5;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
