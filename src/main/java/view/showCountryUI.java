@@ -8,9 +8,12 @@ package view;
 import com.toedter.calendar.JTextFieldDateEditor;
 import controllers.CountryController;
 import java.beans.PropertyChangeEvent;
+import java.io.IOException;
 import java.util.Calendar;
 import org.jfree.ui.RefineryUtilities;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import models.Country;
 import service.AppQueries;
@@ -25,13 +28,13 @@ public class showCountryUI extends javax.swing.JFrame {
     private String countryName = "";
     private Date startDate = null;
     private Date endDate = null;
-    
+
     /**
      * Creates new form ArxikoMenu
      */
     public showCountryUI() {
         initComponents();
-        
+
         // Country Selection
         choice1.add(countryName);
         String[] countryNames = CountryController.getCountryNames();
@@ -41,9 +44,9 @@ public class showCountryUI extends javax.swing.JFrame {
 
         // Date range selection
         Calendar calendar = Calendar.getInstance();
-        
+
         // Start date
-        JTextFieldDateEditor editor1 = (JTextFieldDateEditor)jDateChooser1.getDateEditor();
+        JTextFieldDateEditor editor1 = (JTextFieldDateEditor) jDateChooser1.getDateEditor();
         editor1.setEditable(false);
         calendar.add(Calendar.YEAR, -1);
         startDate = calendar.getTime();
@@ -57,9 +60,9 @@ public class showCountryUI extends javax.swing.JFrame {
                 updateTables();
             }
         });
-        
+
         // End date
-        JTextFieldDateEditor editor2 = (JTextFieldDateEditor)jDateChooser2.getDateEditor();
+        JTextFieldDateEditor editor2 = (JTextFieldDateEditor) jDateChooser2.getDateEditor();
         editor2.setEditable(false);
         calendar.add(Calendar.YEAR, 1);
         endDate = calendar.getTime();
@@ -115,6 +118,7 @@ public class showCountryUI extends javax.swing.JFrame {
         confirmed_cb = new javax.swing.JCheckBox();
         deaths_cb = new javax.swing.JCheckBox();
         recovered_cb = new javax.swing.JCheckBox();
+        showDiagramBtn1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -189,7 +193,7 @@ public class showCountryUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         showDiagramBtn.setBackground(new java.awt.Color(0, 204, 204));
-        showDiagramBtn.setText("Προβολή σε διάγραμμα");
+        showDiagramBtn.setText("ΠΡΟΒΟΛΗ ΣΕ ΔΙΑΓΡΑΜΜΑ");
         showDiagramBtn.setToolTipText("Επιλέξτε την χώρα που σας ενδιαφέρει καθώς και το είδος των δεδομένων");
         showDiagramBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +202,7 @@ public class showCountryUI extends javax.swing.JFrame {
         });
 
         deleteDataBtn.setBackground(new java.awt.Color(0, 204, 204));
-        deleteDataBtn.setText("Διαγραφή δεδομένων");
+        deleteDataBtn.setText("ΔΙΑΓΡΑΦΗ ΔΕΔΟΜΕΝΩΝ");
         deleteDataBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteDataBtnActionPerformed(evt);
@@ -206,7 +210,7 @@ public class showCountryUI extends javax.swing.JFrame {
         });
 
         returnBtn.setBackground(new java.awt.Color(0, 204, 204));
-        returnBtn.setText("Επιστροφή στο αρχικό Menu");
+        returnBtn.setText("ΑΡΧΙΚΟ MENU");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnBtnActionPerformed(evt);
@@ -335,6 +339,15 @@ public class showCountryUI extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
+        showDiagramBtn1.setBackground(new java.awt.Color(0, 204, 204));
+        showDiagramBtn1.setText("ΠΡΟΒΟΛΗ ΣΕ ΧΑΡΤΗ");
+        showDiagramBtn1.setToolTipText("Επιλέξτε την χώρα που σας ενδιαφέρει καθώς και το είδος των δεδομένων");
+        showDiagramBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showDiagramBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -360,19 +373,20 @@ public class showCountryUI extends javax.swing.JFrame {
                                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(2, 2, 2))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(showDiagramBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(returnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(returnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteDataBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(79, 79, 79)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(56, 56, 56)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(912, Short.MAX_VALUE)))
+                    .addContainerGap(905, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,13 +410,15 @@ public class showCountryUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showDiagramBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(showDiagramBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(deleteDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+                .addComponent(dataTab, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -422,16 +438,16 @@ public class showCountryUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menu1ActionPerformed
 
-    
+
     private void showDiagramBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDiagramBtnActionPerformed
-        String selectedCountry = choice1.getSelectedItem().toString();  
+        String selectedCountry = choice1.getSelectedItem().toString();
         Boolean confirmedDataNeeded = confirmed_cb.isSelected();
         Boolean deathsDataNeeded = deaths_cb.isSelected();
         Boolean recoveredDataNeeded = recovered_cb.isSelected();
         Boolean cumulativeDataNeeded = cumulative_cb.isSelected();
-                
-        if(!selectedCountry.equals("") 
-                && ( confirmedDataNeeded || deathsDataNeeded || recoveredDataNeeded)){
+
+        if (!selectedCountry.equals("")
+                && (confirmedDataNeeded || deathsDataNeeded || recoveredDataNeeded)) {
             final CovidChart chart = new CovidChart("Covid-19 Data Chart", selectedCountry, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
             chart.pack();
             RefineryUtilities.centerFrameOnScreen(chart);
@@ -451,7 +467,7 @@ public class showCountryUI extends javax.swing.JFrame {
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
         if (countryName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Δεν έχετε επιλέξει χώρα!",
-                "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+                    "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -466,11 +482,10 @@ public class showCountryUI extends javax.swing.JFrame {
                 // TODO: Delete covid data for the specified date range
                 deleteCovidData.truncateCovidData(country);
                 JOptionPane.showMessageDialog(null, "Η διαγραφή των δεδομένων ήταν επιτυχής!",
-                "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
+                        "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
                 JOptionPane.showMessageDialog(null, "Η επιλεγμένη χώρα δε βρέθηκε στη βάση!",
-                "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+                        "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_deleteDataBtnActionPerformed
@@ -480,15 +495,27 @@ public class showCountryUI extends javax.swing.JFrame {
         updateTables();
     }//GEN-LAST:event_choice1ItemStateChanged
 
+    private void showDiagramBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDiagramBtn1ActionPerformed
+        if (countryName.isEmpty()) {
+            return;
+        }
+        try {
+            // TODO add your handling code here:
+            CountryController.showCountryMap(countryName, startDate, endDate);
+        } catch (IOException ex) {
+            Logger.getLogger(showCountryUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_showDiagramBtn1ActionPerformed
+
     private void updateTables() {
         CountryController.clearTables(deathsTable, confirmedTable, recoveredTable);
         if (countryName.isEmpty()) {
             return;
         }
-        
+
         CountryController.fillTables(deathsTable, confirmedTable, recoveredTable, countryName, startDate, endDate);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -565,5 +592,6 @@ public class showCountryUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox recovered_cb;
     private javax.swing.JButton returnBtn;
     private javax.swing.JButton showDiagramBtn;
+    private javax.swing.JButton showDiagramBtn1;
     // End of variables declaration//GEN-END:variables
 }
