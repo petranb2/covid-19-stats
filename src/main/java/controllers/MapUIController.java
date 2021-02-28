@@ -27,6 +27,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import service.AppQueries;
 import utils.Constants;
+import utils.Map;
 
 /**
  *
@@ -43,79 +44,13 @@ public class MapUIController {
      * @throws IOException
      */
     public static void showMap(String mainCountryName, JList<String> selectedCountriesList, Date startDate, Date endDate) throws IOException {
-        ListModel<String> model = selectedCountriesList.getModel();
-        JsonArray rootJSONArray = new JsonArray();
-        // add main country to the root JSON array
-        Country mainCountry = AppQueries.fetchCountryByName(mainCountryName);
-        Integer deathCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_DEATHS, startDate, endDate);
-        Integer confirmedCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
-        Integer recoveredCases = AppQueries.fetchSumCoviddata(mainCountry, Constants.DATA_KIND_RECOVERED, startDate, endDate);
-        JsonArray mainCountryJSONArray = new JsonArray();
-        mainCountryJSONArray.add(mainCountry.getName()
-                + " deathCases:" + deathCases.toString()
-                + " confirmedCases:" + confirmedCases.toString()
-                + " recoveredCases:" + recoveredCases.toString()
-        );
-        mainCountryJSONArray.add(mainCountry.getLat());
-        mainCountryJSONArray.add(mainCountry.getLong1());
-        mainCountryJSONArray.add(1);
-        rootJSONArray.add(mainCountryJSONArray);
-        //
-        for (int i = 0; i < model.getSize(); i++) {
-            String countryName = model.getElementAt(i);
-            Country country = AppQueries.fetchCountryByName(countryName);
-            deathCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_DEATHS, startDate, endDate);
-            confirmedCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_CONFIRMED, startDate, endDate);
-            recoveredCases = AppQueries.fetchSumCoviddata(country, Constants.DATA_KIND_RECOVERED, startDate, endDate);
-            JsonArray jsonArray = new JsonArray();
-            jsonArray.add(country.getName()
-                    + " deathCases:" + deathCases.toString()
-                    + " confirmedCases:" + confirmedCases.toString()
-                    + " recoveredCases:" + recoveredCases.toString()
-            );
-            jsonArray.add(country.getLat());
-            jsonArray.add(country.getLong1());
-            jsonArray.add(1);
-            rootJSONArray.add(jsonArray);
-        }
-        rootJSONArray.toString();
-        System.out.println(rootJSONArray.toString());
-        File input;
-        input = new File("src//main//resources//CovidMap.html");
-        Document doc = Jsoup.parse(input, "UTF-8");
-        Elements scriptElements = doc.getElementsByTag("script");
-
-        scriptElements.stream().map((element) -> {
-            element.dataNodes().stream().map((node) -> {
-                String script;
-                script = "var locations = " + rootJSONArray.toString();
-                script += node.getWholeData();
-                node.setWholeData(script);
-                return node;
-            }).forEachOrdered((node) -> {
-                System.out.println(node.getWholeData());
-            });
-            return element;
-        }).forEachOrdered((_item) -> {
-            System.out.println("-------------------");
-        });
-        try {
-            FileWriter myWriter = new FileWriter("src//main//resources//CovidMap-data.html");
-            myWriter.write(doc.html());
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        // TODO code application logic here
-        String webpage = "src//main//resources//CovidMap-data.html";
-        try {
-            Runtime.getRuntime().exec("cmd /c start " + webpage); // For WINDOWS
-//            Runtime.getRuntime().exec(new String[]{"/usr/bin/open", "-a", "/Applications/Google Chrome.app", webpage});
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCovidMap.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JsonArray rootJSONArray;
+        rootJSONArray = Map.buildLocationJSON(mainCountryName, selectedCountriesList, startDate, endDate);
+        File templateHTML;
+        templateHTML = Map.openFile(Constants.TEMPLATE_MAP_HTML);
+        Document HTMLDocument = Map.editHTMLScript(templateHTML, rootJSONArray);
+        Map.saveFile(Constants.HTML_MAP_WITH_DATA, HTMLDocument.toString());
+        Map.showHTML(Constants.HTML_MAP_WITH_DATA);
     }
 
     /**

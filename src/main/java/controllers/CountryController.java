@@ -5,14 +5,19 @@
  */
 package controllers;
 
+import com.google.gson.JsonArray;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.Country;
 import models.Coviddata;
+import org.jsoup.nodes.Document;
 import service.AppQueries;
 import utils.Constants;
+import utils.Map;
 
 /**
  *
@@ -22,12 +27,12 @@ public class CountryController {
 
     /**
      *
-     * @return 
+     * @return
      */
     public static String[] getCountryNames() {
         List<Country> countries = AppQueries.fetchCountries();
         String[] names = new String[countries.size()];
-        
+
         for (int i = 0; i < names.length; i++) {
             names[i] = countries.get(i).getName();
         }
@@ -98,5 +103,22 @@ public class CountryController {
             }
         });
 
+    }
+
+    /**
+     *
+     * @param country
+     * @param fromDate
+     * @param endDate
+     * @throws IOException
+     */
+    public static void showCountryMap(String country, Date fromDate, Date endDate) throws IOException {
+        JsonArray rootJSONArray;
+        rootJSONArray = Map.buildLocationJSON(country, fromDate, endDate);
+        File templateHTML;
+        templateHTML = Map.openFile(Constants.TEMPLATE_MAP_HTML);
+        Document HTMLDocument = Map.editHTMLScript(templateHTML, rootJSONArray);
+        Map.saveFile(Constants.HTML_MAP_WITH_DATA, HTMLDocument.toString());
+        Map.showHTML(Constants.HTML_MAP_WITH_DATA);
     }
 }
