@@ -476,23 +476,11 @@ public class showCountryUI extends javax.swing.JFrame {
         Boolean deathsDataNeeded = deaths_cb.isSelected();
         Boolean recoveredDataNeeded = recovered_cb.isSelected();
         Boolean cumulativeDataNeeded = cumulative_cb.isSelected();
-<<<<<<< HEAD
-
-        if (!selectedCountry.equals("")
-                && (confirmedDataNeeded || deathsDataNeeded || recoveredDataNeeded)) {
-            final CovidChart chart = new CovidChart("Covid-19 Data Chart", selectedCountry, confirmedDataNeeded, deathsDataNeeded, recoveredDataNeeded, cumulativeDataNeeded, startDate, endDate);
-            chart.pack();
-            RefineryUtilities.centerFrameOnScreen(chart);
-            chart.setVisible(true);
-        } else {
-            System.out.println("Please select Country and/or the kind of data you would like to plot!");
-=======
         
         if (selectedCountry.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Παρακαλώ επιλέξτε χώρα!",
                     "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
             return;
->>>>>>> ref: Additions for Show Country and Show Map views.
         }
         
         if (!confirmedDataNeeded && !deathsDataNeeded && !recoveredDataNeeded) {
@@ -515,13 +503,8 @@ public class showCountryUI extends javax.swing.JFrame {
 
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
         if (countryName.isEmpty()) {
-<<<<<<< HEAD
-            JOptionPane.showMessageDialog(null, "Δεν έχετε επιλέξει χώρα!",
-                    "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
-=======
             JOptionPane.showMessageDialog(null, "Παρακαλώ επιλέξτε χώρα!",
                 "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
->>>>>>> ref: Additions for Show Country and Show Map views.
             return;
         }
 
