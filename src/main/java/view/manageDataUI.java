@@ -5,7 +5,10 @@
  */
 package view;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import models.Country;
+import service.AppQueries;
 import service.DeleteCovidData;
 import service.LoadCovidData;
 import utils.Constants;
@@ -202,7 +205,7 @@ public class manageDataUI extends javax.swing.JFrame {
         Titlos1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Titlos1.setForeground(new java.awt.Color(0, 204, 204));
         Titlos1.setMinimumSize(new java.awt.Dimension(500, 50));
-        Titlos1.setText("ΔΙΑΧΕΙΡΗΣΗ ΔΕΔΟΜΕΝΩΝ Covid -19");
+        Titlos1.setText("ΔΙΑΧΕΙΡΙΣΗ ΔΕΔΟΜΕΝΩΝ Covid -19");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -280,23 +283,39 @@ public class manageDataUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1ActionPerformed
 
     private void insertCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertCountryBtnActionPerformed
-
+        if (!thanatoiCheckBox.isSelected() && !astheneisCheckBox.isSelected() && !krousmataCheckBox.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί κανένας τύπος δεδομένων!",
+                    "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         LoadCovidData loadData = new LoadCovidData(
                 thanatoiCheckBox.isSelected(),
                 astheneisCheckBox.isSelected(),
                 krousmataCheckBox.isSelected(),
                 Constants.COUTRIES_ONLY);
         loadData.startLoadData();
+        
+        JOptionPane.showMessageDialog(null, "Η εισαγωγή χωρών ολοκληρώθηκε επιτυχώς!",
+                    "ΕΙΣΑΓΩΓΗ", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_insertCountryBtnActionPerformed
 
     private void insertDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertDataBtnActionPerformed
-        // TODO add your handling code here:
+        if (!thanatoiCheckBox.isSelected() && !astheneisCheckBox.isSelected() && !krousmataCheckBox.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί κανένας τύπος δεδομένων!",
+                    "ΣΦΑΛΜΑ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         LoadCovidData loadData = new LoadCovidData(
                 thanatoiCheckBox.isSelected(),
                 astheneisCheckBox.isSelected(),
                 krousmataCheckBox.isSelected(),
                 !Constants.COUTRIES_ONLY);
         loadData.startLoadData();
+        
+        JOptionPane.showMessageDialog(null, "Η εισαγωγή δεδομένων χωρών ολοκληρώθηκε επιτυχώς!",
+                    "ΕΙΣΑΓΩΓΗ", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_insertDataBtnActionPerformed
 
     private void deleteDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataBtnActionPerformed
@@ -306,8 +325,16 @@ public class manageDataUI extends javax.swing.JFrame {
                 "ΔΙΑΓΡΑΦΗ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (answer == JOptionPane.YES_OPTION) {
 
+            long count = AppQueries.fetchCoviddataCount();
             DeleteCovidData deleteCovidData = new DeleteCovidData();
             deleteCovidData.truncateCovidData();
+            if (count > 0) {
+                JOptionPane.showMessageDialog(null, "Διαγράφηκαν " + count + " δεδομένα χωρών!",
+                    "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Δε βρέθηκαν δεδομένα χωρών προς διαγραφή!",
+                    "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_deleteDataBtnActionPerformed
 
@@ -316,9 +343,31 @@ public class manageDataUI extends javax.swing.JFrame {
         int answer = JOptionPane.showOptionDialog(null, "Πρόκειται να διαγραφούν όλες οι χώρες. Θέλετε να προχωρήσετε;",
                 "ΔΙΑΓΡΑΦΗ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (answer == JOptionPane.YES_OPTION) {
-
             DeleteCovidData deleteCovidData = new DeleteCovidData();
-            deleteCovidData.truncateCountries();
+            
+            // Get all countries from database
+            List<Country> countries = AppQueries.fetchCountries();
+            
+            int count = 0; // The number of deleted countries
+            for (Country c : countries) {
+                // Check if country has any covid data
+                long covidDataCount = AppQueries.fetchCoviddataCount(c);
+                if (covidDataCount > 0) {
+                    continue;
+                }
+                
+                // If country has no covid data, proceed to deletion
+                deleteCovidData.truncateCountry(c);
+                count++;
+            }
+            
+            if (count > 0) {
+                JOptionPane.showMessageDialog(null, "Διαγράφηκαν " + count + " χώρες που δεν έχουν δεδομένα!",
+                    "ΔΙΑΓΡΑΦΗ", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Δε βρέθηκαν χώρες χωρίς δεδομένα προς διαγραφή!",
+                    "ΔΙΑΓΡΑΦΗ", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_deleteCountryBtnActionPerformed
 

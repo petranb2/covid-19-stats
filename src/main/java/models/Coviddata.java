@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Coviddata.findAll", query = "SELECT c FROM Coviddata c")
+    , @NamedQuery(name = "Coviddata.getRowCount", query = "SELECT COUNT(c) FROM Coviddata c")
+    , @NamedQuery(name = "Coviddata.getRowCountByCountry", query = "SELECT COUNT(c) FROM Coviddata c WHERE c.country = :country")
     , @NamedQuery(name = "Coviddata.findByCoviddata", query = "SELECT c FROM Coviddata c WHERE c.coviddata = :coviddata")
     , @NamedQuery(name = "Coviddata.findByTrndate", query = "SELECT c FROM Coviddata c WHERE c.trndate = :trndate")
     , @NamedQuery(name = "Coviddata.findByDatakind", query = "SELECT c FROM Coviddata c WHERE c.datakind = :datakind")

@@ -166,7 +166,7 @@ public class ArxikoMenu extends javax.swing.JFrame {
         manageDataBtn.setBackground(new java.awt.Color(0, 204, 204));
         manageDataBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageDataBtn.setForeground(new java.awt.Color(0, 102, 102));
-        manageDataBtn.setText("ΔΙΑΧΕΙΡΗΣΗ ΔΕΔΟΜΕΝΩΝ Covid 19");
+        manageDataBtn.setText("ΔΙΑΧΕΙΡΙΣΗ ΔΕΔΟΜΕΝΩΝ Covid 19");
         manageDataBtn.setMaximumSize(new java.awt.Dimension(350, 50));
         manageDataBtn.setMinimumSize(new java.awt.Dimension(350, 50));
         manageDataBtn.setPreferredSize(new java.awt.Dimension(350, 50));
