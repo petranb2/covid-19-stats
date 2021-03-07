@@ -6,7 +6,6 @@
 package utils;
 
 import com.google.gson.JsonArray;
-import eap.plh.covid19stats.TestCovidMap;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,9 +21,11 @@ import org.jsoup.select.Elements;
 import service.AppQueries;
 
 /**
- *
- * @author kalogeros
- */
+* Τμήμα ΗΛΕ 46
+* @author Κουλιανός Πέτρος 119076
+* @author Κρουκλόβα Όλγα 94996
+* @author Μάλαμας Σάββας 119131
+*/
 public class Map {
 
     /**

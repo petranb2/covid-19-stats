@@ -6,33 +6,26 @@
 package controllers;
 
 import com.google.gson.JsonArray;
-import eap.plh.covid19stats.TestCovidMap;
 import java.awt.Choice;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
 import models.Country;
-import models.Coviddata;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import service.AppQueries;
 import utils.Constants;
 import utils.Map;
 
 /**
- *
- * @author kalogeros
- */
+* Τμήμα ΗΛΕ 46
+* @author Κουλιανός Πέτρος 119076
+* @author Κρουκλόβα Όλγα 94996
+* @author Μάλαμας Σάββας 119131
+*/
 public class MapUIController {
 
     /**

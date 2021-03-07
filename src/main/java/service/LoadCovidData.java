@@ -23,9 +23,11 @@ import utils.Constants;
 import static utils.IsNumeric.isNumeric;
 
 /**
- *
- * @author kalogeros
- */
+* Τμήμα ΗΛΕ 46
+* @author Κουλιανός Πέτρος 119076
+* @author Κρουκλόβα Όλγα 94996
+* @author Μάλαμας Σάββας 119131
+*/
 public class LoadCovidData {
 
     private final boolean deaths;

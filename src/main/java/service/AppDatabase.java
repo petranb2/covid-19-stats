@@ -10,9 +10,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
- * @author kalogeros
- */
+* Τμήμα ΗΛΕ 46
+* @author Κουλιανός Πέτρος 119076
+* @author Κρουκλόβα Όλγα 94996
+* @author Μάλαμας Σάββας 119131
+*/
 public class AppDatabase {
 
     private static final String COVID_DB = "covid-db";

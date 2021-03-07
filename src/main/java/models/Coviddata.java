@@ -25,9 +25,11 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author kalogeros
- */
+* Τμήμα ΗΛΕ 46
+* @author Κουλιανός Πέτρος 119076
+* @author Κρουκλόβα Όλγα 94996
+* @author Μάλαμας Σάββας 119131
+*/
 @Entity
 @Table(name = "COVIDDATA")
 @XmlRootElement
